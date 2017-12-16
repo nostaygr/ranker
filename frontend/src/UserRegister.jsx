@@ -44,4 +44,12 @@ export class UserRegister extends React.Component {
 
 function postForm(form) {
   console.log(form);
+  fetch('http://localhost:3000/subjects', {
+    header: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: form
+  })
 }

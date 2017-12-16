@@ -15,6 +15,8 @@ module.exports = {
     "react"
   ],
   "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "indent": [
       "error",
       2
@@ -27,9 +29,6 @@ module.exports = {
       "error",
       "single"
     ],
-    "semi": [
-      "error",
-      "never"
-    ]
+    "no-extra-semi": "error"
   }
 };

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {
-    :passwords => 'user/passwords',
-    :registrations => 'user/registrations',
-    :sessions => 'user/sessions',
+    :passwords => 'users/passwords',
+    :registrations => 'users/registrations',
+    :sessions => 'users/sessions',
   }
   get 'subjects/index'
 

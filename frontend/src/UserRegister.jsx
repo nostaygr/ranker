@@ -16,9 +16,9 @@ class UserRegisterForm extends React.Component {
     }
 
     var form = new FormData();
-    form.append('name', name);
-    form.append('email', email);
-    form.append('password', password);
+    form.append('user[name]', name);
+    form.append('user[email]', email);
+    form.append('user[password]', password);
     postForm(form);
 
     // valueを空にする

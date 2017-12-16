@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { render } from 'react-dom'
+import 'whatwg-fetch'
 
 class UserRegisterForm extends React.Component {
   handleSubmit(event) {
@@ -14,7 +15,12 @@ class UserRegisterForm extends React.Component {
       return;
     }
 
-    postForm({name: name, email: email, password: password});
+    var form = new FormData();
+    form.append('name', name);
+    form.append('email', email);
+    form.append('password', password);
+    postForm(form);
+
     // valueを空にする
     ReactDOM.findDOMNode(event.target.name).value = '';
     ReactDOM.findDOMNode(event.target.email).value = '';
@@ -24,7 +30,7 @@ class UserRegisterForm extends React.Component {
 
   render() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
+      <form id="user-register" className="commentForm" onSubmit={this.handleSubmit}>
         <input type="text" name="name" placeholder="name" />
         <input type="text" name="email" placeholder="email" />
         <input type="text" name="password" placeholder="password" />
@@ -44,12 +50,12 @@ export class UserRegister extends React.Component {
 
 function postForm(form) {
   console.log(form);
-  fetch('http://localhost:3000/subjects', {
+  fetch('http://localhost:3000/users', {
     header: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json'
     },
     method: 'POST',
     body: form
-  })
+  });
 }

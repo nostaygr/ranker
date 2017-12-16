@@ -1,6 +1,5 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import { render } from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import 'whatwg-fetch'
 
 class UserRegisterForm extends React.Component {
@@ -10,7 +9,6 @@ class UserRegisterForm extends React.Component {
     var name = event.target.name.value;
     var email = event.target.email.value;
     var password = event.target.password.value;
-    console.log(name, email, password);
     if (!name || !email || !password) {
       return;
     }
@@ -49,7 +47,6 @@ export class UserRegister extends React.Component {
 }
 
 function postForm(form) {
-  console.log(form);
   fetch('http://localhost:3000/users', {
     header: {
       Accept: 'application/json',

@@ -1,7 +1,6 @@
-import React from "react"
-import { render } from 'react-dom'
+import React from 'react'
 
-const REQEST_URL = "http://localhost:3000/subjects/index"
+const REQEST_URL = 'http://localhost:3000/subjects/index'
 
 export class ShowRankSample extends React.Component {
 

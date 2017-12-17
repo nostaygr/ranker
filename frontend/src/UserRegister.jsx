@@ -1,7 +1,7 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import { render } from 'react-dom'
-import 'whatwg-fetch'
+import React from "react";
+import ReactDOM from "react-dom";
+import { render } from "react-dom";
+import "whatwg-fetch";
 
 class UserRegisterForm extends React.Component {
   handleSubmit(event) {
@@ -16,21 +16,25 @@ class UserRegisterForm extends React.Component {
     }
 
     var form = new FormData();
-    form.append('user[name]', name);
-    form.append('user[email]', email);
-    form.append('user[password]', password);
+    form.append("user[name]", name);
+    form.append("user[email]", email);
+    form.append("user[password]", password);
     postForm(form);
 
     // valueを空にする
-    ReactDOM.findDOMNode(event.target.name).value = '';
-    ReactDOM.findDOMNode(event.target.email).value = '';
-    ReactDOM.findDOMNode(event.target.password).value = '';
+    ReactDOM.findDOMNode(event.target.name).value = "";
+    ReactDOM.findDOMNode(event.target.email).value = "";
+    ReactDOM.findDOMNode(event.target.password).value = "";
     return;
   }
 
   render() {
     return (
-      <form id="user-register" className="commentForm" onSubmit={this.handleSubmit}>
+      <form
+        id="user-register"
+        className="commentForm"
+        onSubmit={this.handleSubmit}
+      >
         <input type="text" name="name" placeholder="name" />
         <input type="text" name="email" placeholder="email" />
         <input type="text" name="password" placeholder="password" />
@@ -42,20 +46,18 @@ class UserRegisterForm extends React.Component {
 
 export class UserRegister extends React.Component {
   render() {
-    return (
-      <UserRegisterForm />
-    )
+    return <UserRegisterForm />;
   }
 }
 
 function postForm(form) {
   console.log(form);
-  fetch('http://localhost:3000/users', {
+  fetch("http://localhost:3000/users", {
     header: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+      Accept: "application/json",
+      "Content-Type": "application/json"
     },
-    method: 'POST',
+    method: "POST",
     body: form
   });
 }

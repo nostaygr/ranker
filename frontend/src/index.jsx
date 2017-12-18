@@ -1,7 +1,7 @@
-import React from "react"
-import ReactDom from "react-dom"
-import {ShowRankSample} from "./ShowRankSample"
-import {UserRegister} from "./UserRegister"
+import React from 'react';
+import ReactDom from 'react-dom';
+import { ShowRankSample } from './ShowRankSample';
+import { UserRegister } from './UserRegister';
 
 class Index extends React.Component {
   render() {
@@ -18,7 +18,4 @@ class Index extends React.Component {
   }
 }
 
-ReactDom.render(
-  <Index />,
-  document.getElementById("root")
-)
+ReactDom.render(<Index />, document.getElementById('root'));

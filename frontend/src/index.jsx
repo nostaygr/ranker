@@ -1,21 +1,11 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { ShowRankSample } from './ShowRankSample';
-import { UserRegister } from './UserRegister';
+import { BrowserRouter } from 'react-router-dom';
+import { App } from './App';
 
-class Index extends React.Component {
-  render() {
-    return (
-      <div>
-        <div>
-          <ShowRankSample />
-        </div>
-        <div>
-          <UserRegister />
-        </div>
-      </div>
-    );
-  }
-}
-
-ReactDom.render(<Index />, document.getElementById('root'));
+ReactDom.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root'),
+);

@@ -1,19 +1,32 @@
 import React from 'react';
+import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
 
-const Header = () => (
-  <header>
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/signup">SignUp</Link>
-        </li>
-      </ul>
-    </nav>
-  </header>
-);
+const links = [
+  {
+    path: '/',
+    name: 'Home',
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+  },
+];
 
-export default Header;
+export class Header extends React.Component {
+  render() {
+    const linkComponent = links.map(({ path, name }, key) => (
+      <li>
+        <Link to={path}>{name}</Link>
+      </li>
+    ));
+
+    return (
+      <header>
+        <nav>
+          <ul>{linkComponent}</ul>
+        </nav>
+      </header>
+    );
+  }
+}

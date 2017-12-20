@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import Header from './Header';
+import { Header } from './Header';
 import { ShowRankSample } from './ShowRankSample';
 import { UserRegister } from './UserRegister';
 

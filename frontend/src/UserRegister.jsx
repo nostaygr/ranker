@@ -19,7 +19,7 @@ class UserRegisterForm extends React.Component {
     form.append('user[name]', name);
     form.append('user[email]', email);
     form.append('user[password]', password);
-    postForm(form);
+    // postForm(form);
 
     // valueを空にする
     ReactDOM.findDOMNode(event.target.name).value = '';

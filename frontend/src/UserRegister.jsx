@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
+import history from './history';
 import 'whatwg-fetch';
 
 class UserRegisterForm extends React.Component {
@@ -52,5 +53,15 @@ function postForm(form) {
     },
     method: 'POST',
     body: form,
-  });
+  })
+    .then((response) => {
+      if (response.status == 200) {
+        history.push('/');
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch((error) => {
+      alert('failed to signup');
+    });
 }

@@ -19,13 +19,18 @@ const links = [
 
 const buttonStyle = {
   color: 'white',
-  marginTop: 5
-}
+  marginTop: 5,
+};
 
 export class Header extends React.Component {
   render() {
     const linkComponent = links.map(({ path, name }, key) => (
-      <FlatButton label={name} key={key} style={buttonStyle} containerElement={<Link to={path} />} />
+      <FlatButton
+        label={name}
+        key={key}
+        style={buttonStyle}
+        containerElement={<Link to={path} />}
+      />
     ));
 
     return (
@@ -37,11 +42,7 @@ export class Header extends React.Component {
               <ActionHome />
             </IconButton>
           }
-          iconElementRight={
-            <div>
-              {linkComponent}
-            </div>
-          }
+          iconElementRight={<div>{linkComponent}</div>}
         />
       </header>
     );

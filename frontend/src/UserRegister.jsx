@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
+import history from './history';
 import 'whatwg-fetch';
 
 class UserRegisterForm extends React.Component {
@@ -10,16 +11,15 @@ class UserRegisterForm extends React.Component {
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    console.log(name, email, password);
     if (!name || !email || !password) {
       return;
     }
 
     const form = new FormData();
-    form.append('user[name]', name);
-    form.append('user[email]', email);
-    form.append('user[password]', password);
-    // postForm(form);
+    form.append('name', name);
+    form.append('email', email);
+    form.append('password', password);
+    postForm(form);
 
     // valueを空にする
     ReactDOM.findDOMNode(event.target.name).value = '';
@@ -46,13 +46,22 @@ export class UserRegister extends React.Component {
 }
 
 function postForm(form) {
-  console.log(form);
-  fetch('http://localhost:3000/users', {
+  fetch('http://localhost:3000/v1/auth', {
     header: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     method: 'POST',
     body: form,
-  });
+  })
+    .then((response) => {
+      if (response.status == 200) {
+        history.push('/');
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch((error) => {
+      alert('failed to signup');
+    });
 }

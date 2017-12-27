@@ -16,10 +16,25 @@ $ curl -H "Content-Type: application/json" -X POST http://localhost:3000/v1/auth
 {"status":"error","data":{"id":null,"provider":"email","uid":"","name""":"hoge""","email""":"hoge@gmail.com""","created_at""":null,"updated_at":null},"errors":{"email":["has already been taken","has already been taken"],"full_messages":["Email has already been taken","Email has already been taken"]}}'
 
 
-# sign_in
-$ curl -H "Content-Type: application/json" -X POST http://localhost:3000/v1/auth/sign_in  -d  '{"email": "hoge@gmail.com", "password": "hogehoge"}'
+# sign_in (dump header info with -D option)
+
+$curl -D - -H "Content-Type: application/json" -X POST http://localhost:3000/v1/auth/sign_in  -d  '{"email": "hoge@gmail.com", "password": "hogehoge"}'
 
 ## success
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+access-token: Dn-ja2dvqD94sdhn52tEMw
+token-type: Bearer
+client: drkvJv5bhTwdkvDjqH2CHg
+expiry: 1515626800
+uid: hoge@gmail.com
+ETag: W/"5c41e20abe3ab2d295529498917bca4c"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 39bc8ec7-fc1f-40de-9a60-400a714ec672
+X-Runtime: 0.345807
+Vary: Origin
+Transfer-Encoding: chunked
+
 {"data":{"id":6,"email":"hoge@gmail.com","provider":"email","uid":"hoge@gmail.com","name":"hoge"}}
 
 ## error

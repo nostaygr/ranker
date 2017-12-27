@@ -9,3 +9,6 @@
 Subject.create(user_id: 0, title: "好きな映画ベスト10")
 Subject.create(user_id: 0, title: "嫌いな野菜ベスト5")
 Subject.create(user_id: 1, title: "好きなたこ焼きの店ベスト3")
+
+User.create(name: "hoge", email: "hoge@gmail.com", password: "hogehoge", password_confirmation: "hogehoge")
+User.create(name: "foo", email: "foo@gmail.com", password: "foofoofoo", password_confirmation: "foofoofoo")

@@ -3,7 +3,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import { Header } from './Header';
 import { ShowRankSample } from './ShowRankSample';
 import { Login } from './Login';
-import { UserRegister } from './UserRegister';
+import { Signup } from './Signup';
 
 export class App extends React.Component {
   render() {
@@ -15,7 +15,7 @@ export class App extends React.Component {
         <Switch>
           <Route exact path="/" component={ShowRankSample} />
           <Route path="/login" component={Login} />
-          <Route path="/signup" component={UserRegister} />
+          <Route path="/signup" component={Signup} />
         </Switch>
       </div>
     );

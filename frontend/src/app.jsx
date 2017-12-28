@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Header } from './Header';
 import { ShowRankSample } from './ShowRankSample';
+import { Login } from './Login';
 import { UserRegister } from './UserRegister';
 
 export class App extends React.Component {
@@ -13,6 +14,7 @@ export class App extends React.Component {
         </div>
         <Switch>
           <Route exact path="/" component={ShowRankSample} />
+          <Route path="/login" component={Login} />
           <Route path="/signup" component={UserRegister} />
         </Switch>
       </div>

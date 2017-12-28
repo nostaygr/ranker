@@ -39,4 +39,15 @@ Transfer-Encoding: chunked
 
 ## error
 {"errors":["Invalid login credentials. Please try again."]}
+
+
+# get subjects of an user
+
+## success
+$curl -X GET http://localhost:3000/subjects/index  -H'access-token: Dn-ja2dvqD94sdhn52tEMw' -H'client: drkvJv5bhTwdkvDjqH2CHg' -H'uid: hoge@gmail.com'
+[{"id":1,"user_id":1,"title":"好きな映画ベスト10","created_at":"2017-12-28T00:08:39.257Z","updated_at":"2017-12-28T00:08:39.257Z"},{"id":2,"user_id":1,"title":"嫌いな野菜ベスト5","created_at":"2017-12-28T00:08:39.260Z","updated_at":"2017-12-28T00:08:39.260Z"}]
+
+## error
+$curl -X GET http://localhost:3000/subjects/index
+{"errors":["You need to sign in or sign up before continuing."]}
 ```

@@ -12,6 +12,10 @@ const links = [
     name: 'Home',
   },
   {
+    path: '/login',
+    name: 'Login',
+  },
+  {
     path: '/signup',
     name: 'SignUp',
   },

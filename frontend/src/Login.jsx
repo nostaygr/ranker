@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <form id="logIn" className="commentForm" onSubmit={this.handleSubmit}>
+      <form id="login" className="commentForm" onSubmit={this.handleSubmit}>
         <input type="text" name="email" placeholder="email" />
         <input type="text" name="password" placeholder="password" />
         <input type="submit" value="Post" />

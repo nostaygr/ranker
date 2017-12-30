@@ -36,6 +36,7 @@ module RankerBackend
         origins 'localhost:4000'
         resource '*',
           :headers => :any,
+          :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
           :methods => [:get, :post, :put, :delete, :options]
       end
     end

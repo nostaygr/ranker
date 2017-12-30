@@ -52,6 +52,8 @@ function postForm(form) {
   })
     .then((response) => {
       if (response.status == 200) {
+        // TODO ここで localStorage に値を保存しておく
+        // console.log(response.headers.get('access-token'))
         history.push('/');
       } else {
         throw Error(response.statusText);

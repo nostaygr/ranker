@@ -1,4 +1,5 @@
 import React from 'react';
+import history from './history';
 import { render } from 'react-dom';
 
 const REQEST_URL = 'http://localhost:3000/subjects/index';
@@ -16,12 +17,23 @@ export class ShowRankSample extends React.Component {
   }
 
   fetchData() {
-    fetch(REQEST_URL)
-      .then(response => response.json())
-      .then((responseData) => {
-        this.setState({
-          data: responseData,
-        });
+    fetch(REQEST_URL, {
+      headers: {
+        'access-token': localStorage.getItem('access-token'),
+        'client': localStorage.getItem('client'),
+        'uid': localStorage.getItem('uid'),
+      }
+    })
+      .then(response => {
+        if (response.status == 200) {
+          response.json().then(responseData => {
+            this.setState({
+              data: responseData,
+            });
+          })
+        } else {
+          history.push('/login');
+        }
       });
   }
 

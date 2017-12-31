@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 
 const REQEST_URL = 'http://localhost:3000/subjects/index';
 
-export class ShowRankSample extends React.Component {
+export class Subjects extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

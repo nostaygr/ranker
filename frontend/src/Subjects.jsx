@@ -31,6 +31,7 @@ export class Subjects extends React.Component {
           });
         });
       } else {
+        localStorage.setItem('login', "false");
         history.push('/login');
       }
     });

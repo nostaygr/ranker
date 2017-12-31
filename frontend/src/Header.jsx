@@ -6,20 +6,32 @@ import ActionHome from 'material-ui/svg-icons/action/home';
 import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
 
-const links = [
-  {
-    path: '/',
-    name: 'Home',
-  },
-  {
-    path: '/login',
-    name: 'Login',
-  },
-  {
-    path: '/signup',
-    name: 'SignUp',
-  },
-];
+function links() {
+  // ここでログインしているかどうかをチェックして分岐する
+  if (true) {
+    return [
+      {
+        path: '/',
+        name: 'Home',
+      },
+      {
+        path: '/signup',
+        name: 'SignUp',
+      },
+    ]
+  } else {
+    return [
+      {
+        path: '/',
+        name: 'Home',
+      },
+      {
+        path: '/login',
+        name: 'Login',
+      },
+    ]
+  }
+}
 
 const buttonStyle = {
   color: 'white',
@@ -28,7 +40,7 @@ const buttonStyle = {
 
 export class Header extends React.Component {
   render() {
-    const linkComponent = links.map(({ path, name }, key) => (
+    const linkComponent = links().map(({ path, name }, key) => (
       <FlatButton
         label={name}
         key={key}

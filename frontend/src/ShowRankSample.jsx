@@ -20,21 +20,20 @@ export class ShowRankSample extends React.Component {
     fetch(REQEST_URL, {
       headers: {
         'access-token': localStorage.getItem('access-token'),
-        'client': localStorage.getItem('client'),
-        'uid': localStorage.getItem('uid'),
+        client: localStorage.getItem('client'),
+        uid: localStorage.getItem('uid'),
+      },
+    }).then((response) => {
+      if (response.status == 200) {
+        response.json().then((responseData) => {
+          this.setState({
+            data: responseData,
+          });
+        });
+      } else {
+        history.push('/login');
       }
-    })
-      .then(response => {
-        if (response.status == 200) {
-          response.json().then(responseData => {
-            this.setState({
-              data: responseData,
-            });
-          })
-        } else {
-          history.push('/login');
-        }
-      });
+    });
   }
 
   render() {

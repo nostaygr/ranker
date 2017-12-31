@@ -20,8 +20,8 @@ export class Subjects extends React.Component {
     fetch(REQEST_URL, {
       headers: {
         'access-token': localStorage.getItem('access-token'),
-        client: localStorage.getItem('client'),
-        uid: localStorage.getItem('uid'),
+        'client': localStorage.getItem('client'),
+        'uid': localStorage.getItem('uid'),
       },
     }).then((response) => {
       if (response.status == 200) {

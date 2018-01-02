@@ -7,13 +7,13 @@ import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
 
 function links() {
-  // ここでログインしているかどうかをチェックして分岐する
-  if (true) {
+  if (localStorage.getItem('login') === "true") {
     return [
       {
         path: '/',
         name: 'Home',
       },
+      // TODO logout 作成
       {
         path: '/signup',
         name: 'SignUp',
@@ -28,6 +28,10 @@ function links() {
       {
         path: '/login',
         name: 'Login',
+      },
+      {
+        path: '/signup',
+        name: 'SignUp',
       },
     ]
   }

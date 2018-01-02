@@ -2,7 +2,7 @@ import React from 'react';
 import history from './history';
 import { render } from 'react-dom';
 
-const REQEST_URL = 'http://localhost:3000/subjects/index';
+const REQUEST_URL = 'http://localhost:3000/subjects/index';
 
 export class Subjects extends React.Component {
   constructor(props) {
@@ -17,14 +17,14 @@ export class Subjects extends React.Component {
   }
 
   fetchData() {
-    fetch(REQEST_URL, {
+    fetch(REQUEST_URL, {
       headers: {
         'access-token': localStorage.getItem('access-token'),
         'client': localStorage.getItem('client'),
         'uid': localStorage.getItem('uid'),
       },
     }).then((response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         response.json().then((responseData) => {
           this.setState({
             data: responseData,

@@ -43,15 +43,15 @@ export class Login extends React.Component {
 
 function postForm(form) {
   fetch('http://localhost:3000/v1/auth/sign_in', {
-    header: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
     method: 'POST',
     body: form,
   })
     .then((response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
+        localStorage.setItem('access-token', response.headers.get('access-token'));
+        localStorage.setItem('client', response.headers.get('client'));
+        localStorage.setItem('uid', response.headers.get('uid'));
+        localStorage.setItem('login', "true");
         history.push('/');
       } else {
         throw Error(response.statusText);

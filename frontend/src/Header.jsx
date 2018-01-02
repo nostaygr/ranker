@@ -7,34 +7,36 @@ import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
 
 function links() {
-  if (localStorage.getItem('login') === "true") {
-    return [
-      {
-        path: '/',
-        name: 'Home',
-      },
-      // TODO logout 作成
-      {
-        path: '/signup',
-        name: 'SignUp',
-      },
-    ]
-  } else {
+  if (localStorage.getItem('login') === 'true') {
     return [
       {
         path: '/',
         name: 'Home',
       },
       {
-        path: '/login',
-        name: 'Login',
+        path: '/logout',
+        name: 'Logout',
       },
       {
         path: '/signup',
         name: 'SignUp',
       },
-    ]
+    ];
   }
+  return [
+    {
+      path: '/',
+      name: 'Home',
+    },
+    {
+      path: '/login',
+      name: 'Login',
+    },
+    {
+      path: '/signup',
+      name: 'SignUp',
+    },
+  ];
 }
 
 const buttonStyle = {

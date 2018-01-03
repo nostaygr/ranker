@@ -16,7 +16,7 @@ export function signup(name, email, password) {
   })
     .then((response) => {
       if (response.status == 200) {
-        history.push('/');
+        login(email, password);
       } else {
         throw Error(response.statusText);
       }

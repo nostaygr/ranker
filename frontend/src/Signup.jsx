@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
 import 'whatwg-fetch';
-import { signup } from './common.js';
+import { signup } from './common';
 
 class SignupForm extends React.Component {
   handleSubmit(event) {

@@ -6,7 +6,7 @@ import ActionHome from 'material-ui/svg-icons/action/home';
 import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
 
-function links() {
+function getLinks() {
   if (localStorage.getItem('login') === 'true') {
     return [
       {
@@ -46,7 +46,7 @@ const buttonStyle = {
 
 export class Header extends React.Component {
   render() {
-    const linkComponent = links().map(({ path, name }, key) => (
+    const linkComponent = getLinks().map(({ path, name }, key) => (
       <FlatButton
         label={name}
         key={key}

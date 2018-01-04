@@ -15,7 +15,7 @@ export function signup(name, email, password) {
     body: form,
   })
     .then((response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         login(email, password);
       } else {
         throw Error(response.statusText);
@@ -40,7 +40,7 @@ export function login(email, password) {
         localStorage.setItem('access-token', response.headers.get('access-token'));
         localStorage.setItem('client', response.headers.get('client'));
         localStorage.setItem('uid', response.headers.get('uid'));
-        localStorage.setItem('login', "true");
+        localStorage.setItem('login', 'true');
         history.push('/');
       } else {
         throw Error(response.statusText);

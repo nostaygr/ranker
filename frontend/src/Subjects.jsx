@@ -20,8 +20,8 @@ export class Subjects extends React.Component {
     fetch(REQUEST_URL, {
       headers: {
         'access-token': localStorage.getItem('access-token'),
-        'client': localStorage.getItem('client'),
-        'uid': localStorage.getItem('uid'),
+        client: localStorage.getItem('client'),
+        uid: localStorage.getItem('uid'),
       },
     }).then((response) => {
       if (response.status === 200) {
@@ -31,7 +31,7 @@ export class Subjects extends React.Component {
           });
         });
       } else {
-        localStorage.setItem('login', "false");
+        localStorage.setItem('login', 'false');
         history.push('/login');
       }
     });

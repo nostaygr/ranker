@@ -1,8 +1,30 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import history from './history';
 import { render } from 'react-dom';
 
 const REQUEST_URL = 'http://localhost:3000/subjects/index';
+
+class SubjectCreateForm extends React.Component {
+  handleSubmit(event) {
+    event.preventDefault();
+    const title = event.target.title.value;
+    if (!title) {
+      return;
+    }
+
+    ReactDOM.findDOMNode(event.target.title).value = '';
+  }
+
+  render() {
+    return (
+      <form id="subject" className="commentForm" onSubmit={this.handleSubmit}>
+        <input type="text" name="title" placeholder="title" />
+        <input type="submit" value="Post" />
+      </form>
+    );
+  }
+}
 
 export class Subjects extends React.Component {
   constructor(props) {
@@ -40,6 +62,11 @@ export class Subjects extends React.Component {
   }
 
   render() {
-    return <ul>{this.state.data.map(subject => <li key={subject.id}>{subject.title}</li>)}</ul>;
+    return (
+      <div>
+        <ul>{this.state.data.map(subject => <li key={subject.id}>{subject.title}</li>)}</ul>
+        <SubjectCreateForm />
+      </div>
+    );
   }
 }

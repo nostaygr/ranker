@@ -6,20 +6,38 @@ import ActionHome from 'material-ui/svg-icons/action/home';
 import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
 
-const links = [
-  {
-    path: '/',
-    name: 'Home',
-  },
-  {
-    path: '/login',
-    name: 'Login',
-  },
-  {
-    path: '/signup',
-    name: 'SignUp',
-  },
-];
+function getLinks() {
+  if (localStorage.getItem('login') === 'true') {
+    return [
+      {
+        path: '/',
+        name: 'Home',
+      },
+      {
+        path: '/logout',
+        name: 'Logout',
+      },
+      {
+        path: '/signup',
+        name: 'SignUp',
+      },
+    ];
+  }
+  return [
+    {
+      path: '/',
+      name: 'Home',
+    },
+    {
+      path: '/login',
+      name: 'Login',
+    },
+    {
+      path: '/signup',
+      name: 'SignUp',
+    },
+  ];
+}
 
 const buttonStyle = {
   color: 'white',
@@ -28,7 +46,7 @@ const buttonStyle = {
 
 export class Header extends React.Component {
   render() {
-    const linkComponent = links.map(({ path, name }, key) => (
+    const linkComponent = getLinks().map(({ path, name }, key) => (
       <FlatButton
         label={name}
         key={key}

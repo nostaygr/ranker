@@ -13,7 +13,9 @@ export class Subjects extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    if (localStorage.getItem('login') === 'true') {
+      this.fetchData();
+    }
   }
 
   fetchData() {

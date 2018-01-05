@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
-import history from './history';
 import 'whatwg-fetch';
+import { login } from './common';
 
 class LoginForm extends React.Component {
   handleSubmit(event) {
@@ -13,11 +13,7 @@ class LoginForm extends React.Component {
     if (!email || !password) {
       return;
     }
-
-    const form = new FormData();
-    form.append('email', email);
-    form.append('password', password);
-    postForm(form);
+    login(email, password);
 
     // valueを空にする
     ReactDOM.findDOMNode(event.target.email).value = '';
@@ -39,25 +35,4 @@ export class Login extends React.Component {
   render() {
     return <LoginForm />;
   }
-}
-
-function postForm(form) {
-  fetch('http://localhost:3000/v1/auth/sign_in', {
-    method: 'POST',
-    body: form,
-  })
-    .then((response) => {
-      if (response.status === 200) {
-        localStorage.setItem('access-token', response.headers.get('access-token'));
-        localStorage.setItem('client', response.headers.get('client'));
-        localStorage.setItem('uid', response.headers.get('uid'));
-        localStorage.setItem('login', 'true');
-        history.push('/');
-      } else {
-        throw Error(response.statusText);
-      }
-    })
-    .catch((error) => {
-      alert('failed to signin');
-    });
 }

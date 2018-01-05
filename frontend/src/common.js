@@ -50,3 +50,28 @@ export function login(email, password) {
       alert('failed to signin');
     });
 }
+
+export function createSubject(title) {
+  const form = new FormData();
+  form.append('title', title);
+
+  fetch('http://localhost:3000/subjects', {
+    header: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+    method: 'POST',
+    body: form,
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        location.reload();
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch((error) => {
+      alert('failed to create subject');
+    });
+}

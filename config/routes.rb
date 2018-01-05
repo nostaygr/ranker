@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'subjects/index'
+  post 'subjects', to: 'subjects#create'
 
   namespace :v1 do
     mount_devise_token_auth_for 'User',

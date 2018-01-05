@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import history from './history';
 import { render } from 'react-dom';
+import { createSubject } from './common';
 
 const REQUEST_URL = 'http://localhost:3000/subjects/index';
 
@@ -12,6 +13,7 @@ class SubjectCreateForm extends React.Component {
     if (!title) {
       return;
     }
+    createSubject(title);
 
     ReactDOM.findDOMNode(event.target.title).value = '';
   }

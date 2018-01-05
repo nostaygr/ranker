@@ -56,7 +56,7 @@ export function createSubject(title) {
   form.append('title', title);
 
   fetch('http://localhost:3000/subjects', {
-    header: {
+    headers: {
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),
       uid: localStorage.getItem('uid'),
@@ -65,7 +65,7 @@ export function createSubject(title) {
     body: form,
   })
     .then((response) => {
-      if (response.status === 200) {
+      if (response.status === 204) {
         location.reload();
       } else {
         throw Error(response.statusText);

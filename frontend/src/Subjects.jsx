@@ -64,11 +64,14 @@ export class Subjects extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <ul>{this.state.data.map(subject => <li key={subject.id}>{subject.title}</li>)}</ul>
-        <SubjectCreateForm />
-      </div>
-    );
+    if (localStorage.getItem('login') === 'true') {
+      return (
+        <div>
+          <ul>{this.state.data.map(subject => <li key={subject.id}>{subject.title}</li>)}</ul>
+          <SubjectCreateForm />
+        </div>
+      );
+    }
+    return null;
   }
 }

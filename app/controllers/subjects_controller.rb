@@ -5,4 +5,16 @@ class SubjectsController < ApplicationController
     @subjects = current_v1_user.subjects
     render json: @subjects
   end
+
+  def create
+    @subject = Subject.new(subject_params)
+    @subject.save
+  end
+
+  private
+
+    def subject_params
+      params[:user_id] = current_v1_user.id
+      params.permit(:title, :user_id)
+    end
 end

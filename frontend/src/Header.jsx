@@ -58,7 +58,14 @@ export class Header extends React.Component {
     return (
       <header>
         <AppBar
-          title={<span>Ranker</span>}
+          title={
+            <img
+              src="images/ranker_only_text.png"
+              width="80px"
+              alt="Ranker"
+              style={{ position: 'relative', top: '15%' }}
+            />
+          }
           iconElementLeft={
             <IconButton containerElement={<Link to="/" />}>
               <ActionHome />

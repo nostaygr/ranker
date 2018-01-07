@@ -8,5 +8,7 @@ Rails.application.routes.draw do
                                 controllers: { registrations: 'v1/auth/registrations' }
   end
 
+  get 'auth/twitter/callback', to: 'twitter_authentication#callback'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

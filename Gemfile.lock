@@ -54,6 +54,8 @@ GEM
       devise (> 3.5.2, <= 4.3)
       rails (< 6)
     dotenv (0.7.0)
+    dotenv-rails (0.7.0)
+      dotenv (= 0.7.0)
     erubi (1.7.0)
     ffi (1.9.18)
     foreman (0.64.0)
@@ -80,9 +82,16 @@ GEM
     nio4r (2.1.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
-    omniauth (1.7.1)
+    oauth (0.5.4)
+    omniauth (1.8.1)
       hashie (>= 3.4.6, < 3.6.0)
       rack (>= 1.6.2, < 3)
+    omniauth-oauth (1.1.0)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-twitter (1.4.0)
+      omniauth-oauth (~> 1.1)
+      rack
     orm_adapter (0.5.0)
     puma (3.11.0)
     rack (2.0.3)
@@ -149,9 +158,10 @@ PLATFORMS
 DEPENDENCIES
   byebug
   devise_token_auth
+  dotenv-rails
   foreman
   listen (>= 3.0.5, < 3.2)
-  omniauth
+  omniauth-twitter
   puma (~> 3.7)
   rack-cors
   rails (~> 5.1.4)
@@ -161,4 +171,4 @@ DEPENDENCIES
   tzinfo-data
 
 BUNDLED WITH
-   1.15.4
+   1.16.1

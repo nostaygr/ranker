@@ -1,8 +1,5 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { orange400 } from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
@@ -58,35 +55,24 @@ export class Header extends React.Component {
       />
     ));
 
-    const muiTheme = getMuiTheme({
-      palette: {
-        primary1Color: orange400,
-      },
-      appBar: {
-        height: 50,
-      },
-    });
-
     return (
       <header>
-        <MuiThemeProvider muiTheme={muiTheme}>
-          <AppBar
-            title={
-              <img
-                src="images/ranker_only_text.png"
-                width="80px"
-                alt="Ranker"
-                style={{ position: 'relative', top: '15%' }}
-              />
-            }
-            iconElementLeft={
-              <IconButton containerElement={<Link to="/" />}>
-                <ActionHome />
-              </IconButton>
-            }
-            iconElementRight={<div>{linkComponent}</div>}
-          />
-        </MuiThemeProvider>
+        <AppBar
+          title={
+            <img
+              src="images/ranker_only_text.png"
+              width="80px"
+              alt="Ranker"
+              style={{ position: 'relative', top: '15%' }}
+            />
+          }
+          iconElementLeft={
+            <IconButton containerElement={<Link to="/" />}>
+              <ActionHome />
+            </IconButton>
+          }
+          iconElementRight={<div>{linkComponent}</div>}
+        />
       </header>
     );
   }

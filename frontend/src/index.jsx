@@ -4,10 +4,11 @@ import { Router } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import history from './history';
 import { App } from './App';
+import muiTheme from './theme';
 
 ReactDom.render(
   <Router history={history}>
-    <MuiThemeProvider>
+    <MuiThemeProvider muiTheme={muiTheme}>
       <App />
     </MuiThemeProvider>
   </Router>,

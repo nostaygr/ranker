@@ -41,8 +41,8 @@ export function login(email, password) {
         localStorage.setItem('client', response.headers.get('client'));
         localStorage.setItem('uid', response.headers.get('uid'));
         localStorage.setItem('login', 'true');
-        response.json().then(responseJson => {
-          localStorage.setItem('user_id', responseJson.data.id);
+        response.json().then(responseData => {
+          localStorage.setItem('user_id', responseData.data.id);
         });
         history.push('/');
       } else {

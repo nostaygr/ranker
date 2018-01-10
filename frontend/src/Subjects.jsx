@@ -4,7 +4,7 @@ import history from './history';
 import { render } from 'react-dom';
 import { createSubject } from './common';
 
-const REQUEST_URL = 'http://localhost:3000/subjects/index';
+const REQUEST_URL = `http://localhost:3000/users/${localStorage.getItem('user_id')}/subjects/`;
 
 class SubjectCreateForm extends React.Component {
   handleSubmit(event) {

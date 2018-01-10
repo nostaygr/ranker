@@ -41,7 +41,7 @@ export function login(email, password) {
         localStorage.setItem('client', response.headers.get('client'));
         localStorage.setItem('uid', response.headers.get('uid'));
         localStorage.setItem('login', 'true');
-        response.json().then(responseData => {
+        response.json().then((responseData) => {
           localStorage.setItem('user_id', responseData.data.id);
         });
         history.push('/');
@@ -77,4 +77,25 @@ export function createSubject(title) {
     .catch((error) => {
       alert('failed to create subject');
     });
+}
+
+export function getSubject(_this, user_id) {
+  fetch(`http://localhost:3000/users/${user_id}/subjects/`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+  }).then((response) => {
+    if (response.status === 200) {
+      response.json().then((responseData) => {
+        _this.setState({
+          data: responseData,
+        });
+      });
+    } else {
+      localStorage.setItem('login', 'false');
+      history.push('/login');
+    }
+  });
 }

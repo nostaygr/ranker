@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import history from './history';
 import { render } from 'react-dom';
 import { createSubject } from './common';
-
-const REQUEST_URL = `http://localhost:3000/users/${localStorage.getItem('user_id')}/subjects/`;
+import { getSubject } from './common';
 
 class SubjectCreateForm extends React.Component {
   handleSubmit(event) {
@@ -38,29 +37,8 @@ export class Subjects extends React.Component {
 
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
-      this.fetchData();
+      getSubject(this, localStorage.getItem('user_id'));
     }
-  }
-
-  fetchData() {
-    fetch(REQUEST_URL, {
-      headers: {
-        'access-token': localStorage.getItem('access-token'),
-        client: localStorage.getItem('client'),
-        uid: localStorage.getItem('uid'),
-      },
-    }).then((response) => {
-      if (response.status === 200) {
-        response.json().then((responseData) => {
-          this.setState({
-            data: responseData,
-          });
-        });
-      } else {
-        localStorage.setItem('login', 'false');
-        history.push('/login');
-      }
-    });
   }
 
   render() {

@@ -10,4 +10,4 @@ const muiTheme = getMuiTheme({
   },
 });
 
-export default muiTheme
+export default muiTheme;

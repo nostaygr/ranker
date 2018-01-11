@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import history from './history';
 import { render } from 'react-dom';
+import { Link } from 'react-router-dom';
 import { createSubject } from './common';
 
 class SubjectCreateForm extends React.Component {
@@ -44,7 +45,13 @@ export class Subjects extends React.Component {
     if (localStorage.getItem('login') === 'true') {
       return (
         <div>
-          <ul>{this.state.data.map(subject => <li key={subject.id}>{subject.title}</li>)}</ul>
+          <ul>
+            {this.state.data.map(subject => (
+              <li key={subject.id}>
+                <Link to={`/subjects/${subject.id}`}>{subject.title}</Link>
+              </li>
+            ))}
+          </ul>
           <SubjectCreateForm />
         </div>
       );

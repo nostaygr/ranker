@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Header } from './Header';
+import { Subject } from './Subject';
 import { Subjects } from './Subjects';
 import { Login } from './Login';
 import { Logout } from './Logout';
@@ -23,6 +24,7 @@ export class App extends React.Component {
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/signup" component={Signup} />
+          <Route path="/subjects/:id" component={Subject} />
         </Switch>
       </div>
     );

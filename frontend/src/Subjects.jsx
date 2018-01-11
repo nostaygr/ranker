@@ -38,7 +38,6 @@ export class Subjects extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
       this.props.onClick(this, localStorage.getItem('user_id'));
-      getSubject(this, localStorage.getItem('user_id'));
     }
   }
 

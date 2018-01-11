@@ -6,6 +6,9 @@ class SubjectsController < ApplicationController
     render json: @subjects
   end
 
+  def show
+  end
+
   def create
     @subject = Subject.new(subject_params)
     @subject.save

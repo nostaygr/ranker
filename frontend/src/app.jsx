@@ -15,8 +15,11 @@ export class App extends React.Component {
           <Header />
         </div>
         <Switch>
-          <Route exact path="/"
-            render={props => <Subjects onClick={(_this, user_id) => getSubject(_this, user_id)}/>} />
+          <Route
+            exact
+            path="/"
+            render={props => <Subjects onClick={(_this, user_id) => getSubject(_this, user_id)} />}
+          />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/signup" component={Signup} />

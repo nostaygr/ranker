@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import history from './history';
 import { render } from 'react-dom';
 import { createSubject } from './common';
-import { getSubject } from './common';
 
 class SubjectCreateForm extends React.Component {
   handleSubmit(event) {

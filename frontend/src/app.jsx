@@ -24,7 +24,9 @@ export class App extends React.Component {
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/signup" component={Signup} />
-          <Route path="/subjects/:id" component={Subject} />
+          <Route path="/subjects/:id" render={(props) => (
+            <Subject {...props} />
+          )} />
         </Switch>
       </div>
     );

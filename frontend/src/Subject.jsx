@@ -2,10 +2,10 @@ import React from 'react';
 
 export class Subject extends React.Component {
   render() {
-    const { id, subject } = this.props;
+    const subject = this.props.subject;
     return (
       <div>
-        {id}: {subject.title}
+        {subject.id}: {subject.title}
       </div>
     );
   }

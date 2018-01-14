@@ -45,7 +45,6 @@ export class App extends React.Component {
             render={props => (
               <Subject
                 subject={this.findSubjectById(parseInt(props.match.params.id))}
-                id={props.match.params.id}
               />
             )}
           />

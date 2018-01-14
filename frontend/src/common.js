@@ -90,7 +90,7 @@ export function getSubject(_this, user_id) {
     if (response.status === 200) {
       response.json().then((responseData) => {
         _this.setState({
-          data: responseData,
+          subjects: responseData,
         });
       });
     } else {

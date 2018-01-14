@@ -16,6 +16,10 @@ export class App extends React.Component {
     };
   }
 
+  findSubjectById(subjectId) {
+    return this.state.subjects.filter(subject => subject.id === subjectId)[0];
+  }
+
   render() {
     return (
       <div>
@@ -38,7 +42,12 @@ export class App extends React.Component {
           <Route path="/signup" component={Signup} />
           <Route
             path="/subjects/:id"
-            render={props => <Subject subjects={this.state.subjects} subjectId={props.match.params.id} />}
+            render={props => (
+              <Subject
+                subject={this.findSubjectById(parseInt(props.match.params.id))}
+                id={props.match.params.id}
+              />
+            )}
           />
         </Switch>
       </div>

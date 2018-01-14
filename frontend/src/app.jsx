@@ -12,9 +12,10 @@ export class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      subjects: [],
     };
   }
+
   render() {
     return (
       <div>
@@ -28,18 +29,17 @@ export class App extends React.Component {
             render={() => (
               <Subjects
                 showSubjects={user_id => getSubject(this, user_id)}
-                subjects={this.state.data}
+                subjects={this.state.subjects}
               />
             )}
           />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
           <Route path="/signup" component={Signup} />
-          <Route path="/subjects/:id" render={() => (
-            <Subject {...props}
-            />
-          )}
-        />
+          <Route
+            path="/subjects/:id"
+            render={props => <Subject subjects={this.state.subjects} subjectId={props.match.params.id} />}
+          />
         </Switch>
       </div>
     );

@@ -12,7 +12,7 @@ class SubjectCreateForm extends React.Component {
     if (!title) {
       return;
     }
-    createSubject(title);
+    createSubject(title, localStorage.getItem('user_id'));
 
     ReactDOM.findDOMNode(event.target.title).value = '';
   }

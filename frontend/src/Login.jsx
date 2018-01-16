@@ -5,7 +5,7 @@ import 'whatwg-fetch';
 import { login } from './common';
 
 class LoginForm extends React.Component {
-  handleSubmit(event) {
+  handleSubmit(event, onClick) {
     // ボタンを押すことによる遷移を抑制
     event.preventDefault();
     const email = event.target.email.value;
@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
     if (!email || !password) {
       return;
     }
-    login(email, password);
+    onClick(email, password);
 
     // valueを空にする
     ReactDOM.findDOMNode(event.target.email).value = '';
@@ -22,7 +22,11 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <form id="login" className="commentForm" onSubmit={this.handleSubmit}>
+      <form
+        id="login"
+        className="commentForm"
+        onSubmit={event => this.handleSubmit(event, this.props.onClick)}
+      >
         <input type="text" name="email" placeholder="email" />
         <input type="text" name="password" placeholder="password" />
         <input type="submit" value="Post" />
@@ -31,8 +35,6 @@ class LoginForm extends React.Component {
   }
 }
 
-export class Login extends React.Component {
-  render() {
-    return <LoginForm />;
-  }
+export function Login(props) {
+  return <LoginForm onClick={props.onClick} />;
 }

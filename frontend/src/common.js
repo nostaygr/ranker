@@ -54,6 +54,10 @@ export function login(email, password) {
     });
 }
 
+export const setLogout = function () {
+  localStorage.setItem('login', 'false');
+};
+
 export function createSubject(title) {
   const form = new FormData();
   form.append('title', title);

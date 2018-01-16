@@ -5,7 +5,7 @@ import 'whatwg-fetch';
 import { signup } from './common';
 
 class SignupForm extends React.Component {
-  handleSubmit(event) {
+  handleSubmit(event, onClick) {
     // ボタンを押すことによる遷移を抑制
     event.preventDefault();
     const name = event.target.name.value;
@@ -14,7 +14,7 @@ class SignupForm extends React.Component {
     if (!name || !email || !password) {
       return;
     }
-    signup(name, email, password);
+    onClick(name, email, password);
 
     // valueを空にする
     ReactDOM.findDOMNode(event.target.name).value = '';
@@ -24,7 +24,11 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <form id="signup" className="commentForm" onSubmit={this.handleSubmit}>
+      <form
+        id="signup"
+        className="commentForm"
+        onSubmit={event => this.handleSubmit(event, this.props.onClick)}
+      >
         <input type="text" name="name" placeholder="name" />
         <input type="text" name="email" placeholder="email" />
         <input type="text" name="password" placeholder="password" />
@@ -34,8 +38,6 @@ class SignupForm extends React.Component {
   }
 }
 
-export class Signup extends React.Component {
-  render() {
-    return <SignupForm />;
-  }
+export function Signup(props) {
+  return <SignupForm onClick={props.onClick} />;
 }

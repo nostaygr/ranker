@@ -54,11 +54,11 @@ export function login(email, password) {
     });
 }
 
-export function createSubject(title) {
+export function createSubject(title, user_id) {
   const form = new FormData();
   form.append('title', title);
 
-  fetch('http://localhost:3000/subjects', {
+  fetch('http://localhost:3000/users/${user_id}/subjects', {
     headers: {
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),

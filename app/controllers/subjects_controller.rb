@@ -18,6 +18,6 @@ class SubjectsController < ApplicationController
 
     def subject_params
       params[:user_id] = current_v1_user.id
-      params.permit(:title, :user_id)
+      params.permit(:title, :is_public, :user_id)
     end
 end

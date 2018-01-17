@@ -61,6 +61,7 @@ export const setLogout = function () {
 export function createSubject(title, user_id) {
   const form = new FormData();
   form.append('title', title);
+  form.append('is_public', false);
 
   fetch('http://localhost:3000/users/${user_id}/subjects', {
     headers: {

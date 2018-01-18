@@ -104,3 +104,24 @@ export function getSubject(_this, user_id) {
     }
   });
 }
+
+export function deleteSubject(subject_id) {
+  fetch(`http://localhost:3000/subjects/${subject_id}`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+    method: 'DELETE',
+  })
+    .then((response) => {
+      if (response.status === 204) {
+        location.reload();
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch((error) => {
+      alert('failed to delete subject');
+    });
+}

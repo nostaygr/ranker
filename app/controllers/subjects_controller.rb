@@ -14,10 +14,15 @@ class SubjectsController < ApplicationController
     @subject.save
   end
 
+  def destroy
+    @subject = Subject.find(subject_params[:id])
+    @subject.destroy
+  end
+
   private
 
     def subject_params
       params[:user_id] = current_v1_user.id
-      params.permit(:title, :is_public, :user_id)
+      params.permit(:title, :is_public, :user_id, :id)
     end
 end

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import history from './history';
 import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { createSubject } from './common';
+import { createSubject, deleteSubject } from './common';
 
 class SubjectCreateForm extends React.Component {
   handleSubmit(event) {
@@ -34,17 +34,33 @@ export class Subjects extends React.Component {
     }
   }
 
+  deleteSubmit(event) {
+    event.preventDefault();
+    const subject_id = event.target.subjectId.value;
+    deleteSubject(subject_id);
+  }
+
   render() {
     if (localStorage.getItem('login') === 'true') {
       return (
         <div>
-          <ul>
+          <table>
             {this.props.subjects.map(subject => (
-              <li key={subject.id}>
-                <Link to={`/subjects/${subject.id}`}>{subject.title}</Link>
-              </li>
+              <tbody key={subject.id}>
+                <tr>
+                  <td>
+                    <Link to={`/subjects/${subject.id}`}>{subject.title}</Link>
+                  </td>
+                  <td>
+                    <form id="deleteSubject" className="form" onSubmit={this.deleteSubmit}>
+                      <input type="hidden" name="subjectId" value={subject.id} />
+                      <input type="submit" value="Delete" />
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
             ))}
-          </ul>
+          </table>
           <SubjectCreateForm />
         </div>
       );

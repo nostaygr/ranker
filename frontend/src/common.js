@@ -125,3 +125,30 @@ export function deleteSubject(subject_id) {
       alert('failed to delete subject');
     });
 }
+
+export function createItem(name, subject_id) {
+  const form = new FormData();
+  form.append('name', name);
+  // TODO: rank は現在存在する item の最大rank+1の値にする
+  form.append('rank', 1);
+
+  fetch(`http://localhost:3000/subjects/${subject_id}/items`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+    method: 'POST',
+    body: form,
+  })
+    .then((response) => {
+      if (response.status === 204) {
+        location.reload();
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch((error) => {
+      alert('failed to create item');
+    });
+}

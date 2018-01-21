@@ -41,25 +41,28 @@ export class Subjects extends React.Component {
   }
 
   render() {
+    const subjects = this.props.subjects;
+
     if (localStorage.getItem('login') === 'true') {
       return (
         <div>
           <table>
-            {this.props.subjects.map(subject => (
-              <tbody key={subject.id}>
-                <tr>
-                  <td>
-                    <Link to={`/subjects/${subject.id}`}>{subject.title}</Link>
-                  </td>
-                  <td>
-                    <form id="deleteSubject" className="form" onSubmit={this.deleteSubmit}>
-                      <input type="hidden" name="subjectId" value={subject.id} />
-                      <input type="submit" value="Delete" />
-                    </form>
-                  </td>
-                </tr>
-              </tbody>
-            ))}
+            {subjects &&
+              subjects.map(subject => (
+                <tbody key={subject.id}>
+                  <tr>
+                    <td>
+                      <Link to={`/subjects/${subject.id}`}>{subject.title}</Link>
+                    </td>
+                    <td>
+                      <form id="deleteSubject" className="form" onSubmit={this.deleteSubmit}>
+                        <input type="hidden" name="subjectId" value={subject.id} />
+                        <input type="submit" value="Delete" />
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
           </table>
           <SubjectCreateForm />
         </div>

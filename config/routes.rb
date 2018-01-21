@@ -5,7 +5,9 @@ Rails.application.routes.draw do
                                 controllers: { registrations: 'v1/auth/registrations' }
   end
   resources :users, shallow: true, only: [] do
-    resources :subjects, only: [:index, :show, :create, :destroy]
+    resources :subjects, shallow: true, only: [:index, :show, :create, :destroy] do
+      resources :items, only: [:index, :show, :create, :destroy]
+    end
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

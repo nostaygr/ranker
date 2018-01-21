@@ -6,7 +6,7 @@ import { Subjects } from './Subjects';
 import { Login } from './Login';
 import { Logout } from './Logout';
 import { Signup } from './Signup';
-import { signup, login, setLogout, getSubject } from './common';
+import { signup, login, setLogout, getSubject, getItem } from './common';
 
 export class App extends React.Component {
   constructor(props) {
@@ -32,8 +32,8 @@ export class App extends React.Component {
             path="/"
             render={() => (
               <Subjects
-                showSubjects={user_id => getSubject(this, user_id)}
                 subjects={this.state.subjects}
+                showSubjects={user_id => getSubject(this, user_id)}
               />
             )}
           />
@@ -43,7 +43,11 @@ export class App extends React.Component {
           <Route
             path="/subjects/:id"
             render={props => (
-              <Subject subject={this.findSubjectById(parseInt(props.match.params.id))} />
+              <Subject
+                items={this.state.items}
+                subject={this.findSubjectById(parseInt(props.match.params.id))}
+                showItems={subject_id => getItem(this, subject_id)}
+              />
             )}
           />
         </Switch>

@@ -173,4 +173,3 @@ export function getItem(_this, subject_id) {
     }
   });
 }
-

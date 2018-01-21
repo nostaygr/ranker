@@ -9,7 +9,6 @@ class ItemCreateForm extends React.Component {
     if (!name) {
       return;
     }
-    console.log(subject_id)
     createItem(name, subject_id);
 
     ReactDOM.findDOMNode(event.target.name).value = '';
@@ -17,7 +16,11 @@ class ItemCreateForm extends React.Component {
 
   render() {
     return (
-      <form id="subject" className="commentForm" onSubmit={e => this.handleSubmit(e, this.props.subject_id)}>
+      <form
+        id="subject"
+        className="commentForm"
+        onSubmit={e => this.handleSubmit(e, this.props.subject_id)}
+      >
         <input type="text" name="name" placeholder="name" />
         <input type="submit" value="Post" />
       </form>
@@ -38,19 +41,18 @@ export class Subject extends React.Component {
     return (
       // item を表示する
       <div>
-        <div>
-          {subject.title}
-        </div>
+        <div>{subject.title}</div>
         <table>
-          {items && items.map(item => (
-            <tbody key={item.id}>
-              <tr>
-                <td>
-                  {item.rank}:{item.name}
-                </td>
-              </tr>
-            </tbody>
-          ))}
+          {items &&
+            items.map(item => (
+              <tbody key={item.id}>
+                <tr>
+                  <td>
+                    {item.rank}:{item.name}
+                  </td>
+                </tr>
+              </tbody>
+            ))}
         </table>
         <ItemCreateForm subject_id={subject.id} />
       </div>

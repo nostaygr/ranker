@@ -129,7 +129,6 @@ export function deleteSubject(subject_id) {
 export function createItem(name, subject_id) {
   const form = new FormData();
   form.append('name', name);
-  // TODO: rank は現在存在する item の最大rank+1の値にする
   form.append('rank', 1);
 
   fetch(`http://localhost:3000/subjects/${subject_id}/items`, {

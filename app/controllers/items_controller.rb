@@ -1,10 +1,11 @@
 class ItemsController < ApplicationController
   before_action :authenticate_v1_user!
 
-  def show
+  def index
+    render json: Subject.find(item_params[:subject_id]).items
   end
 
-  def index
+  def show
   end
 
   def create

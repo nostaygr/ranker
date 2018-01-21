@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  get 'items/show'
-
-  get 'items/index'
-
-  get 'items/destroy'
-
   namespace :v1 do
     mount_devise_token_auth_for 'User',
                                 at: 'auth',

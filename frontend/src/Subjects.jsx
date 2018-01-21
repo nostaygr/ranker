@@ -41,11 +41,13 @@ export class Subjects extends React.Component {
   }
 
   render() {
+    const subjects = this.props.subjects;
+
     if (localStorage.getItem('login') === 'true') {
       return (
         <div>
           <table>
-            {this.props.subjects.map(subject => (
+            {subjects && subjects.map(subject => (
               <tbody key={subject.id}>
                 <tr>
                   <td>

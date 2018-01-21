@@ -26,14 +26,32 @@ class ItemCreateForm extends React.Component {
 }
 
 export class Subject extends React.Component {
+  componentDidMount() {
+    if (localStorage.getItem('login') === 'true') {
+      this.props.showItems(this.props.subject.id);
+    }
+  }
+
   render() {
     const subject = this.props.subject;
+    const items = this.props.items;
     return (
       // item を表示する
       <div>
         <div>
-          {subject.id}: {subject.title}
+          {subject.title}
         </div>
+        <table>
+          {items && items.map(item => (
+            <tbody key={item.id}>
+              <tr>
+                <td>
+                  {item.rank}:{item.name}
+                </td>
+              </tr>
+            </tbody>
+          ))}
+        </table>
         <ItemCreateForm subject_id={subject.id} />
       </div>
     );

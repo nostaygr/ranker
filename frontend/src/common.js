@@ -63,7 +63,7 @@ export function createSubject(title, user_id) {
   form.append('title', title);
   form.append('is_public', false);
 
-  fetch('http://localhost:3000/users/${user_id}/subjects', {
+  fetch(`http://localhost:3000/users/${user_id}/subjects`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),
@@ -152,3 +152,25 @@ export function createItem(name, subject_id) {
       alert('failed to create item');
     });
 }
+
+export function getItem(_this, subject_id) {
+  fetch(`http://localhost:3000/subjects/${subject_id}/items`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+  }).then((response) => {
+    if (response.status === 200) {
+      response.json().then((responseData) => {
+        _this.setState({
+          items: responseData,
+        });
+      });
+    } else {
+      localStorage.setItem('login', 'false');
+      history.push('/login');
+    }
+  });
+}
+

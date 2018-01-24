@@ -7,6 +7,8 @@ class SubjectsController < ApplicationController
   end
 
   def show
+    @subject = Subject.find(subject_params[:id])
+    render json: @subject
   end
 
   def create

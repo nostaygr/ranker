@@ -32,6 +32,7 @@ export class Subject extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
       this.props.getItemsCallback(this.props.subject.id);
+      this.props.getSubjectCallback(this.props.subject.id);
     }
   }
 

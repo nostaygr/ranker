@@ -84,7 +84,7 @@ export function createSubject(title, user_id) {
     });
 }
 
-export function getSubject(_this, user_id) {
+export function getSubjects(_this, user_id) {
   fetch(`http://localhost:3000/users/${user_id}/subjects/`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
@@ -151,7 +151,7 @@ export function createItem(name, subject_id) {
     });
 }
 
-export function getItem(_this, subject_id) {
+export function getItems(_this, subject_id) {
   fetch(`http://localhost:3000/subjects/${subject_id}/items`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),

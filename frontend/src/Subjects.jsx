@@ -30,7 +30,7 @@ class SubjectCreateForm extends React.Component {
 export class Subjects extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
-      this.props.showSubjects(localStorage.getItem('user_id'));
+      this.props.getSubjectsCallback(localStorage.getItem('user_id'));
     }
   }
 

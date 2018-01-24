@@ -31,7 +31,7 @@ class ItemCreateForm extends React.Component {
 export class Subject extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
-      this.props.showItems(this.props.subject.id);
+      this.props.getItemsCallback(this.props.subject.id);
     }
   }
 

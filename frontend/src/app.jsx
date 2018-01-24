@@ -33,7 +33,7 @@ export class App extends React.Component {
             render={() => (
               <Subjects
                 subjects={this.state.subjects}
-                showSubjects={user_id => getSubjects(this, user_id)}
+                getSubjectsCallback={user_id => getSubjects(this, user_id)}
               />
             )}
           />
@@ -46,7 +46,7 @@ export class App extends React.Component {
               <Subject
                 items={this.state.items}
                 subject={this.findSubjectById(parseInt(props.match.params.id))}
-                showItems={subject_id => getItems(this, subject_id)}
+                getItemsCallback={subject_id => getItems(this, subject_id)}
               />
             )}
           />

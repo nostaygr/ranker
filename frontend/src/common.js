@@ -58,7 +58,7 @@ export const setLogout = function () {
   localStorage.setItem('login', 'false');
 };
 
-export function createSubject(title, user_id) {
+export function createSubject(_this, title, user_id) {
   const form = new FormData();
   form.append('title', title);
   form.append('is_public', false);
@@ -73,8 +73,10 @@ export function createSubject(title, user_id) {
     body: form,
   })
     .then((response) => {
-      if (response.status === 204) {
-        location.reload();
+      if (response.status === 200 || response.status === 204) {
+        _this.setState(prev => ({
+          updateSubjectsToggle: !prev.updateSubjectsToggle,
+        }));
       } else {
         throw Error(response.statusText);
       }

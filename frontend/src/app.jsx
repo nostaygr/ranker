@@ -6,13 +6,22 @@ import { Subjects } from './Subjects';
 import { Login } from './Login';
 import { Logout } from './Logout';
 import { Signup } from './Signup';
-import { signup, login, setLogout, getSubjects, getItems } from './common';
+import {
+  signup,
+  login,
+  setLogout,
+  getSubjects,
+  subjectsUpdated,
+  getItems,
+  createSubject,
+} from './common';
 
 export class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       subjects: [],
+      updateSubjectsToggle: false,
     };
   }
 
@@ -33,7 +42,11 @@ export class App extends React.Component {
             render={() => (
               <Subjects
                 subjects={this.state.subjects}
+                updateSubjectsToggle={this.state.updateSubjectsToggle}
                 getSubjectsCallback={user_id => getSubjects(this, user_id)}
+                createSubjectCallback={(title, user_id) => {
+                  createSubject(this, title, user_id);
+                }}
               />
             )}
           />

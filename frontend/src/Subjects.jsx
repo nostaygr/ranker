@@ -3,23 +3,27 @@ import ReactDOM from 'react-dom';
 import history from './history';
 import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { createSubject, deleteSubject } from './common';
+import { deleteSubject } from './common';
 
 class SubjectCreateForm extends React.Component {
-  handleSubmit(event) {
+  handleSubmit(event, onClick) {
     event.preventDefault();
     const title = event.target.title.value;
     if (!title) {
       return;
     }
-    createSubject(title, localStorage.getItem('user_id'));
+    onClick(title, localStorage.getItem('user_id'));
 
     ReactDOM.findDOMNode(event.target.title).value = '';
   }
 
   render() {
     return (
-      <form id="subject" className="commentForm" onSubmit={this.handleSubmit}>
+      <form
+        id="subject"
+        className="commentForm"
+        onSubmit={e => this.handleSubmit(e, this.props.onClick)}
+      >
         <input type="text" name="title" placeholder="title" />
         <input type="submit" value="Post" />
       </form>
@@ -30,6 +34,15 @@ class SubjectCreateForm extends React.Component {
 export class Subjects extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
+      this.props.getSubjectsCallback(localStorage.getItem('user_id'));
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      localStorage.getItem('login') === 'true' &&
+      this.props.updateSubjectsToggle !== nextProps.updateSubjectsToggle
+    ) {
       this.props.getSubjectsCallback(localStorage.getItem('user_id'));
     }
   }
@@ -64,7 +77,11 @@ export class Subjects extends React.Component {
                 </tbody>
               ))}
           </table>
-          <SubjectCreateForm />
+          <SubjectCreateForm
+            onClick={(title, user_id) => {
+              this.props.createSubjectCallback(title, user_id);
+            }}
+          />
         </div>
       );
     }

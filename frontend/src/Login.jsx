@@ -26,9 +26,9 @@ class LoginForm extends React.Component {
     // ボタンを押すことによる遷移を抑制
     event.preventDefault();
     fetch(REQUEST_URL, {
-      headers: {
-      },
+      redirect: 'manual'
     }).then((response) => {
+      window.open(response.url)
       console.log(response)
     });
   }

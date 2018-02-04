@@ -74,9 +74,11 @@ export function createSubject(_this, title, user_id) {
   })
     .then((response) => {
       if (response.ok) {
-        _this.setState(prev => ({
-          updateSubjectsToggle: !prev.updateSubjectsToggle,
-        }));
+        response.json().then((responseData) => {
+          _this.setState({
+            subjects: responseData,
+          });
+        })
       } else {
         throw Error(response.statusText);
       }

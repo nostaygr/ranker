@@ -22,7 +22,6 @@ export class App extends React.Component {
     super(props);
     this.state = {
       subjects: [],
-      updateSubjectsToggle: false,
     };
   }
 
@@ -43,7 +42,6 @@ export class App extends React.Component {
             render={() => (
               <Subjects
                 subjects={this.state.subjects}
-                updateSubjectsToggle={this.state.updateSubjectsToggle}
                 getSubjectsCallback={user_id => getSubjects(this, user_id)}
                 createSubjectCallback={(title, user_id) => {
                   createSubject(this, title, user_id);

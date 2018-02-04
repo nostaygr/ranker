@@ -38,15 +38,6 @@ export class Subjects extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (
-      localStorage.getItem('login') === 'true' &&
-      this.props.updateSubjectsToggle !== nextProps.updateSubjectsToggle
-    ) {
-      this.props.getSubjectsCallback(localStorage.getItem('user_id'));
-    }
-  }
-
   deleteSubmit(event) {
     event.preventDefault();
     const subject_id = event.target.subjectId.value;

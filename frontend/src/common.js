@@ -15,7 +15,7 @@ export function signup(name, email, password) {
     body: form,
   })
     .then((response) => {
-      if (response.status === 200) {
+      if (response.ok) {
         login(email, password);
       } else {
         throw Error(response.statusText);
@@ -36,7 +36,7 @@ export function login(email, password) {
     body: form,
   })
     .then((response) => {
-      if (response.status === 200) {
+      if (response.ok) {
         localStorage.setItem('access-token', response.headers.get('access-token'));
         localStorage.setItem('client', response.headers.get('client'));
         localStorage.setItem('uid', response.headers.get('uid'));
@@ -73,7 +73,7 @@ export function createSubject(_this, title, user_id) {
     body: form,
   })
     .then((response) => {
-      if (response.status === 200 || response.status === 204) {
+      if (response.ok) {
         _this.setState(prev => ({
           updateSubjectsToggle: !prev.updateSubjectsToggle,
         }));
@@ -94,7 +94,7 @@ export function getSubjects(_this, user_id) {
       uid: localStorage.getItem('uid'),
     },
   }).then((response) => {
-    if (response.status === 200) {
+    if (response.ok) {
       response.json().then((responseData) => {
         _this.setState({
           subjects: responseData,
@@ -117,7 +117,7 @@ export function deleteSubject(subject_id) {
     method: 'DELETE',
   })
     .then((response) => {
-      if (response.status === 204) {
+      if (response.ok) {
         location.reload();
       } else {
         throw Error(response.statusText);
@@ -142,7 +142,7 @@ export function createItem(name, subject_id) {
     body: form,
   })
     .then((response) => {
-      if (response.status === 204) {
+      if (response.ok) {
         location.reload();
       } else {
         throw Error(response.statusText);
@@ -161,7 +161,7 @@ export function getItems(_this, subject_id) {
       uid: localStorage.getItem('uid'),
     },
   }).then((response) => {
-    if (response.status === 200) {
+    if (response.ok) {
       response.json().then((responseData) => {
         _this.setState({
           items: responseData,

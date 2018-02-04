@@ -78,7 +78,7 @@ export function createSubject(_this, title, user_id) {
           _this.setState({
             subjects: responseData,
           });
-        })
+        });
       } else {
         throw Error(response.statusText);
       }
@@ -150,7 +150,7 @@ export function deleteSubject(subject_id) {
     });
 }
 
-export function createItem(name, subject_id) {
+export function createItem(_this, name, subject_id) {
   const form = new FormData();
   form.append('name', name);
 
@@ -165,7 +165,11 @@ export function createItem(name, subject_id) {
   })
     .then((response) => {
       if (response.ok) {
-        location.reload();
+        response.json().then((responseData) => {
+          _this.setState({
+            items: responseData,
+          });
+        });
       } else {
         throw Error(response.statusText);
       }

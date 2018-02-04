@@ -15,6 +15,7 @@ import {
   subjectsUpdated,
   getItems,
   createSubject,
+  createItem,
 } from './common';
 
 export class App extends React.Component {
@@ -60,6 +61,9 @@ export class App extends React.Component {
                 subject={this.state.subject}
                 getItemsCallback={subject_id => getItems(this, subject_id)}
                 getSubjectCallback={subject_id => getSubject(this, subject_id)}
+                createItemsCallback={(name, subject_id) => {
+                  createItem(this, name, subject_id);
+                }}
                 {...props}
               />
             )}

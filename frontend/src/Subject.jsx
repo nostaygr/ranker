@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { createItem } from './common';
 
 class ItemCreateForm extends React.Component {
-  handleSubmit(event, subject_id) {
+  handleSubmit(event, subject_id, onClick) {
     event.preventDefault();
     const name = event.target.name.value;
     if (!name) {
       return;
     }
-    createItem(name, subject_id);
+    onClick(name, subject_id);
 
     ReactDOM.findDOMNode(event.target.name).value = '';
   }
@@ -19,7 +19,7 @@ class ItemCreateForm extends React.Component {
       <form
         id="subject"
         className="commentForm"
-        onSubmit={e => this.handleSubmit(e, this.props.subject_id)}
+        onSubmit={e => this.handleSubmit(e, this.props.subject_id, this.props.onClick)}
       >
         <input type="text" name="name" placeholder="name" />
         <input type="submit" value="Post" />
@@ -56,13 +56,15 @@ export class Subject extends React.Component {
                 </tbody>
               ))}
           </table>
-          <ItemCreateForm subject_id={subject.id} />
+          <ItemCreateForm
+            subject_id={subject.id}
+            onClick={(name, subject_id) => {
+              this.props.createItemsCallback(name, subject_id);
+            }}
+          />
         </div>
       );
-    } else {
-      return (
-        <div>loading...</div>
-      )
     }
+    return <div>loading...</div>;
   }
 }

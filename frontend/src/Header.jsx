@@ -60,7 +60,7 @@ export class Header extends React.Component {
         <AppBar
           title={
             <img
-              src="images/ranker_only_text.png"
+              src="/images/ranker_only_text.png"
               width="80px"
               alt="Ranker"
               style={{ position: 'relative', top: '15%' }}

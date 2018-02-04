@@ -24,7 +24,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server --history-api-fallback",
-    "lint": "prettier-eslint --write src/*"
+    "lint": "prettier-eslint --write src/*",
+    "build": "./node_modules/.bin/webpack"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

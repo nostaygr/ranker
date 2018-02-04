@@ -2,25 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import history from './history';
 import { render } from 'react-dom';
-import { createSubject } from './common';
-
-const REQUEST_URL = 'http://localhost:3000/subjects/index';
+import { Link } from 'react-router-dom';
+import { deleteSubject } from './common';
 
 class SubjectCreateForm extends React.Component {
-  handleSubmit(event) {
+  handleSubmit(event, onClick) {
     event.preventDefault();
     const title = event.target.title.value;
     if (!title) {
       return;
     }
-    createSubject(title);
+    onClick(title, localStorage.getItem('user_id'));
 
     ReactDOM.findDOMNode(event.target.title).value = '';
   }
 
   render() {
     return (
-      <form id="subject" className="commentForm" onSubmit={this.handleSubmit}>
+      <form
+        id="subject"
+        className="commentForm"
+        onSubmit={e => this.handleSubmit(e, this.props.onClick)}
+      >
         <input type="text" name="title" placeholder="title" />
         <input type="submit" value="Post" />
       </form>
@@ -29,46 +32,56 @@ class SubjectCreateForm extends React.Component {
 }
 
 export class Subjects extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-    };
-  }
-
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
-      this.fetchData();
+      this.props.getSubjectsCallback(localStorage.getItem('user_id'));
     }
   }
 
-  fetchData() {
-    fetch(REQUEST_URL, {
-      headers: {
-        'access-token': localStorage.getItem('access-token'),
-        client: localStorage.getItem('client'),
-        uid: localStorage.getItem('uid'),
-      },
-    }).then((response) => {
-      if (response.status === 200) {
-        response.json().then((responseData) => {
-          this.setState({
-            data: responseData,
-          });
-        });
-      } else {
-        localStorage.setItem('login', 'false');
-        history.push('/login');
-      }
-    });
+  componentWillReceiveProps(nextProps) {
+    if (
+      localStorage.getItem('login') === 'true' &&
+      this.props.updateSubjectsToggle !== nextProps.updateSubjectsToggle
+    ) {
+      this.props.getSubjectsCallback(localStorage.getItem('user_id'));
+    }
+  }
+
+  deleteSubmit(event) {
+    event.preventDefault();
+    const subject_id = event.target.subjectId.value;
+    deleteSubject(subject_id);
   }
 
   render() {
+    const subjects = this.props.subjects;
+
     if (localStorage.getItem('login') === 'true') {
       return (
         <div>
-          <ul>{this.state.data.map(subject => <li key={subject.id}>{subject.title}</li>)}</ul>
-          <SubjectCreateForm />
+          <table>
+            {subjects &&
+              subjects.map(subject => (
+                <tbody key={subject.id}>
+                  <tr>
+                    <td>
+                      <Link to={`/subjects/${subject.id}`}>{subject.title}</Link>
+                    </td>
+                    <td>
+                      <form id="deleteSubject" className="form" onSubmit={this.deleteSubmit}>
+                        <input type="hidden" name="subjectId" value={subject.id} />
+                        <input type="submit" value="Delete" />
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+          </table>
+          <SubjectCreateForm
+            onClick={(title, user_id) => {
+              this.props.createSubjectCallback(title, user_id);
+            }}
+          />
         </div>
       );
     }

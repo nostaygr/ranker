@@ -15,7 +15,7 @@ export function signup(name, email, password) {
     body: form,
   })
     .then((response) => {
-      if (response.status === 200) {
+      if (response.ok) {
         login(email, password);
       } else {
         throw Error(response.statusText);
@@ -36,11 +36,14 @@ export function login(email, password) {
     body: form,
   })
     .then((response) => {
-      if (response.status === 200) {
+      if (response.ok) {
         localStorage.setItem('access-token', response.headers.get('access-token'));
         localStorage.setItem('client', response.headers.get('client'));
         localStorage.setItem('uid', response.headers.get('uid'));
         localStorage.setItem('login', 'true');
+        response.json().then((responseData) => {
+          localStorage.setItem('user_id', responseData.data.id);
+        });
         history.push('/');
       } else {
         throw Error(response.statusText);
@@ -51,11 +54,16 @@ export function login(email, password) {
     });
 }
 
-export function createSubject(title) {
+export const setLogout = function () {
+  localStorage.setItem('login', 'false');
+};
+
+export function createSubject(_this, title, user_id) {
   const form = new FormData();
   form.append('title', title);
+  form.append('is_public', false);
 
-  fetch('http://localhost:3000/subjects', {
+  fetch(`http://localhost:3000/users/${user_id}/subjects`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),
@@ -65,8 +73,10 @@ export function createSubject(title) {
     body: form,
   })
     .then((response) => {
-      if (response.status === 204) {
-        location.reload();
+      if (response.ok) {
+        _this.setState(prev => ({
+          updateSubjectsToggle: !prev.updateSubjectsToggle,
+        }));
       } else {
         throw Error(response.statusText);
       }
@@ -74,4 +84,112 @@ export function createSubject(title) {
     .catch((error) => {
       alert('failed to create subject');
     });
+}
+
+export function getSubjects(_this, user_id) {
+  fetch(`http://localhost:3000/users/${user_id}/subjects/`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+  }).then((response) => {
+    if (response.ok) {
+      response.json().then((responseData) => {
+        _this.setState({
+          subjects: responseData,
+        });
+      });
+    } else {
+      localStorage.setItem('login', 'false');
+      history.push('/login');
+    }
+  });
+}
+
+export function getSubject(_this, subject_id) {
+  fetch(`http://localhost:3000/subjects/${subject_id}`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+  }).then((response) => {
+    if (response.status === 200) {
+      response.json().then((responseData) => {
+        _this.setState({
+          subject: responseData,
+        });
+      });
+    } else {
+      history.push('/');
+    }
+  });
+}
+
+export function deleteSubject(subject_id) {
+  fetch(`http://localhost:3000/subjects/${subject_id}`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+    method: 'DELETE',
+  })
+    .then((response) => {
+      if (response.ok) {
+        location.reload();
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch((error) => {
+      alert('failed to delete subject');
+    });
+}
+
+export function createItem(name, subject_id) {
+  const form = new FormData();
+  form.append('name', name);
+
+  fetch(`http://localhost:3000/subjects/${subject_id}/items`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+    method: 'POST',
+    body: form,
+  })
+    .then((response) => {
+      if (response.ok) {
+        location.reload();
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch((error) => {
+      alert('failed to create item');
+    });
+}
+
+export function getItems(_this, subject_id) {
+  fetch(`http://localhost:3000/subjects/${subject_id}/items`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+  }).then((response) => {
+    if (response.ok) {
+      response.json().then((responseData) => {
+        _this.setState({
+          items: responseData,
+        });
+      });
+    } else {
+      localStorage.setItem('login', 'false');
+      history.push('/login');
+    }
+  });
 }

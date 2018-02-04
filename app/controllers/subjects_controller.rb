@@ -6,15 +6,25 @@ class SubjectsController < ApplicationController
     render json: @subjects
   end
 
+  def show
+    @subject = Subject.find(subject_params[:id])
+    render json: @subject
+  end
+
   def create
     @subject = Subject.new(subject_params)
     @subject.save
+  end
+
+  def destroy
+    @subject = Subject.find(subject_params[:id])
+    @subject.destroy
   end
 
   private
 
     def subject_params
       params[:user_id] = current_v1_user.id
-      params.permit(:title, :user_id)
+      params.permit(:title, :is_public, :user_id, :id)
     end
 end

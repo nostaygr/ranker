@@ -12,25 +12,25 @@
 
 ActiveRecord::Schema.define(version: 20180119140011) do
 
-  create_table "items", force: :cascade do |t|
+  create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "rank"
     t.string "name"
-    t.integer "subject_id"
+    t.bigint "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_items_on_subject_id"
   end
 
-  create_table "subjects", force: :cascade do |t|
+  create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.boolean "is_public"
     t.index ["user_id"], name: "index_subjects_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -52,4 +52,6 @@ ActiveRecord::Schema.define(version: 20180119140011) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "items", "subjects"
+  add_foreign_key "subjects", "users"
 end

@@ -1,6 +1,11 @@
 # README
 
 ```
+# create ranker user for mysql
+$ mysql -uroot
+> CREATE USER ranker IDENTIFIED BY 'rankerranker';
+> grant all on *.* to 'ranker'@'localhost' identified by 'rankerranker';
+
 $ rails s
 # subject
 $ curl -X GET http://localhost:3000/subjects/index

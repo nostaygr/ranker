@@ -109,8 +109,8 @@ export function getSubjects(_this, userId) {
   });
 }
 
-export function getSubject(_this, subject_id) {
-  fetch(`http://localhost:3000/subjects/${subject_id}`, {
+export function getSubject(_this, subjectId) {
+  fetch(`http://localhost:3000/subjects/${subjectId}`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),
@@ -129,8 +129,8 @@ export function getSubject(_this, subject_id) {
   });
 }
 
-export function deleteSubject(subject_id) {
-  fetch(`http://localhost:3000/subjects/${subject_id}`, {
+export function deleteSubject(subjectId) {
+  fetch(`http://localhost:3000/subjects/${subjectId}`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),
@@ -150,11 +150,11 @@ export function deleteSubject(subject_id) {
     });
 }
 
-export function createItem(_this, name, subject_id) {
+export function createItem(_this, name, subjectId) {
   const form = new FormData();
   form.append('name', name);
 
-  fetch(`http://localhost:3000/subjects/${subject_id}/items`, {
+  fetch(`http://localhost:3000/subjects/${subjectId}/items`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),
@@ -179,8 +179,8 @@ export function createItem(_this, name, subject_id) {
     });
 }
 
-export function getItems(_this, subject_id) {
-  fetch(`http://localhost:3000/subjects/${subject_id}/items`, {
+export function getItems(_this, subjectId) {
+  fetch(`http://localhost:3000/subjects/${subjectId}/items`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),

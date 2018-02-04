@@ -40,8 +40,8 @@ export class Subjects extends React.Component {
 
   deleteSubmit(event) {
     event.preventDefault();
-    const subject_id = event.target.subjectId.value;
-    deleteSubject(subject_id);
+    const subjectId = event.target.subjectId.value;
+    deleteSubject(subjectId);
   }
 
   render() {

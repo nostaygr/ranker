@@ -9,13 +9,13 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: ranker
-  password: rankerranker
 
 development:
   <<: *default
   database: db/development_mysql2
   timeout: 10000
+  username: ranker
+  password: rankerranker
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -23,6 +23,8 @@ development:
 test:
   <<: *default
   database: db/test_mysql2
+  username: ranker
+  password: rankerranker
 
 production:
   <<: *default

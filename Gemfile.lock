@@ -161,9 +161,8 @@ DEPENDENCIES
   dotenv-rails (~> 2.2.1)
   foreman
   listen (>= 3.0.5, < 3.2)
-  omniauth-twitter
   mysql2
-  omniauth
+  omniauth-twitter
   puma (~> 3.7)
   rack-cors
   rails (~> 5.1.4)

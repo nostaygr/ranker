@@ -42,7 +42,7 @@ export function login(email, password) {
         localStorage.setItem('uid', response.headers.get('uid'));
         localStorage.setItem('login', 'true');
         response.json().then((responseData) => {
-          localStorage.setItem('user_id', responseData.data.id);
+          localStorage.setItem('userId', responseData.data.id);
         });
         history.push('/');
       } else {
@@ -58,12 +58,12 @@ export const setLogout = function () {
   localStorage.setItem('login', 'false');
 };
 
-export function createSubject(_this, title, user_id) {
+export function createSubject(_this, title, userId) {
   const form = new FormData();
   form.append('title', title);
   form.append('is_public', false);
 
-  fetch(`http://localhost:3000/users/${user_id}/subjects`, {
+  fetch(`http://localhost:3000/users/${userId}/subjects`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),
@@ -88,8 +88,8 @@ export function createSubject(_this, title, user_id) {
     });
 }
 
-export function getSubjects(_this, user_id) {
-  fetch(`http://localhost:3000/users/${user_id}/subjects/`, {
+export function getSubjects(_this, userId) {
+  fetch(`http://localhost:3000/users/${userId}/subjects/`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
       client: localStorage.getItem('client'),

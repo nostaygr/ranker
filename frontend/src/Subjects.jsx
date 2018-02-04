@@ -12,7 +12,7 @@ class SubjectCreateForm extends React.Component {
     if (!title) {
       return;
     }
-    onClick(title, localStorage.getItem('user_id'));
+    onClick(title, localStorage.getItem('userId'));
 
     ReactDOM.findDOMNode(event.target.title).value = '';
   }
@@ -34,7 +34,7 @@ class SubjectCreateForm extends React.Component {
 export class Subjects extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
-      this.props.getSubjectsCallback(localStorage.getItem('user_id'));
+      this.props.getSubjectsCallback(localStorage.getItem('userId'));
     }
   }
 
@@ -69,8 +69,8 @@ export class Subjects extends React.Component {
               ))}
           </table>
           <SubjectCreateForm
-            onClick={(title, user_id) => {
-              this.props.createSubjectCallback(title, user_id);
+            onClick={(title, userId) => {
+              this.props.createSubjectCallback(title, userId);
             }}
           />
         </div>

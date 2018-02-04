@@ -43,9 +43,9 @@ export class App extends React.Component {
             render={() => (
               <Subjects
                 subjects={this.state.subjects}
-                getSubjectsCallback={user_id => getSubjects(this, user_id)}
-                createSubjectCallback={(title, user_id) => {
-                  createSubject(this, title, user_id);
+                getSubjectsCallback={userId => getSubjects(this, userId)}
+                createSubjectCallback={(title, userId) => {
+                  createSubject(this, title, userId);
                 }}
               />
             )}

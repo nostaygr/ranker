@@ -105,6 +105,26 @@ export function getSubjects(_this, user_id) {
   });
 }
 
+export function getSubject(_this, subject_id) {
+  fetch(`http://localhost:3000/subjects/${subject_id}`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+  }).then((response) => {
+    if (response.status === 200) {
+      response.json().then((responseData) => {
+        _this.setState({
+          subject: responseData,
+        });
+      });
+    } else {
+      history.push('/');
+    }
+  });
+}
+
 export function deleteSubject(subject_id) {
   fetch(`http://localhost:3000/subjects/${subject_id}`, {
     headers: {

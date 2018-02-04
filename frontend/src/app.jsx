@@ -6,7 +6,7 @@ import { Subjects } from './Subjects';
 import { Login } from './Login';
 import { Logout } from './Logout';
 import { Signup } from './Signup';
-import { signup, login, setLogout, getSubjects, getItems } from './common';
+import { signup, login, setLogout, getSubjects, getSubject, getItems } from './common';
 
 export class App extends React.Component {
   constructor(props) {
@@ -45,8 +45,10 @@ export class App extends React.Component {
             render={props => (
               <Subject
                 items={this.state.items}
-                subject={this.findSubjectById(parseInt(props.match.params.id))}
+                subject={this.state.subject}
                 getItemsCallback={subject_id => getItems(this, subject_id)}
+                getSubjectCallback={subject_id => getSubject(this, subject_id)}
+                {...props}
               />
             )}
           />

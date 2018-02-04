@@ -31,31 +31,38 @@ class ItemCreateForm extends React.Component {
 export class Subject extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
-      this.props.getItemsCallback(this.props.subject.id);
+      this.props.getItemsCallback(this.props.match.params.id);
+      this.props.getSubjectCallback(this.props.match.params.id);
     }
   }
 
   render() {
     const subject = this.props.subject;
     const items = this.props.items;
-    return (
-      // item を表示する
-      <div>
-        <div>{subject.title}</div>
-        <table>
-          {items &&
-            items.map(item => (
-              <tbody key={item.id}>
-                <tr>
-                  <td>
-                    {item.rank}:{item.name}
-                  </td>
-                </tr>
-              </tbody>
-            ))}
-        </table>
-        <ItemCreateForm subject_id={subject.id} />
-      </div>
-    );
+    if (subject) {
+      return (
+        // item を表示する
+        <div>
+          <div>{subject.title}</div>
+          <table>
+            {items &&
+              items.map(item => (
+                <tbody key={item.id}>
+                  <tr>
+                    <td>
+                      {item.rank}:{item.name}
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+          </table>
+          <ItemCreateForm subject_id={subject.id} />
+        </div>
+      );
+    } else {
+      return (
+        <div>loading...</div>
+      )
+    }
   }
 }

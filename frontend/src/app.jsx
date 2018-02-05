@@ -15,6 +15,7 @@ import {
   subjectsUpdated,
   getItems,
   createSubject,
+  createItem,
 } from './common';
 
 export class App extends React.Component {
@@ -22,7 +23,6 @@ export class App extends React.Component {
     super(props);
     this.state = {
       subjects: [],
-      updateSubjectsToggle: false,
     };
   }
 
@@ -43,10 +43,9 @@ export class App extends React.Component {
             render={() => (
               <Subjects
                 subjects={this.state.subjects}
-                updateSubjectsToggle={this.state.updateSubjectsToggle}
-                getSubjectsCallback={user_id => getSubjects(this, user_id)}
-                createSubjectCallback={(title, user_id) => {
-                  createSubject(this, title, user_id);
+                getSubjectsCallback={userId => getSubjects(this, userId)}
+                createSubjectCallback={(title, userId) => {
+                  createSubject(this, title, userId);
                 }}
               />
             )}
@@ -60,8 +59,11 @@ export class App extends React.Component {
               <Subject
                 items={this.state.items}
                 subject={this.state.subject}
-                getItemsCallback={subject_id => getItems(this, subject_id)}
-                getSubjectCallback={subject_id => getSubject(this, subject_id)}
+                getItemsCallback={subjectId => getItems(this, subjectId)}
+                getSubjectCallback={subjectId => getSubject(this, subjectId)}
+                createItemsCallback={(name, subjectId) => {
+                  createItem(this, name, subjectId);
+                }}
                 {...props}
               />
             )}

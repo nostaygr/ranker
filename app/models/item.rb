@@ -3,5 +3,5 @@ class Item < ApplicationRecord
 
   validates :name, length: { in: 1...50 }
 
-  scope :next_rank, -> { maximum(:rank) + 1 }
+  scope :next_rank, -> { (maximum(:rank) || 0) + 1 }
 end

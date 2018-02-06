@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params.merge({rank: @current_items.next_rank}))
     @item.save
-    render json: @current_items
+    render json: @item
   end
 
   def destroy

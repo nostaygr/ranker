@@ -166,8 +166,8 @@ export function createItem(_this, name, subjectId) {
     .then((response) => {
       if (response.ok) {
         response.json().then((responseData) => {
-          _this.setState({
-            items: responseData,
+          _this.setState((prev) => {
+            return {items: prev.items.concat([responseData])}
           });
         });
       } else {

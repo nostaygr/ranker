@@ -75,8 +75,8 @@ export function createSubject(_this, title, userId) {
     .then((response) => {
       if (response.ok) {
         response.json().then((responseData) => {
-          _this.setState({
-            subjects: responseData,
+          _this.setState((prev) => {
+            return {subjects: prev.subjects.concat([responseData])}
           });
         });
       } else {

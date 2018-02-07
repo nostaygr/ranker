@@ -1,18 +1,21 @@
 class ItemsController < ApplicationController
   before_action :authenticate_v1_user!
-  before_action :current_items, only: [:index, :create]
 
   def index
-    render json: @current_items
+    if current_v1_user.id == current_items_user.id || current_subject.is_public
+      render json: current_items and return
+    end
+
+    render nothing: true, status: 204
   end
 
   def show
   end
 
   def create
-    @item = Item.new(item_params.merge({rank: @current_items.next_rank}))
-    @item.save
-    render json: @item
+    item = Item.new(item_params.merge({rank: current_items.next_rank}))
+    render json: item and return if item.save
+    render nothing: true, status: 400
   end
 
   def destroy
@@ -24,8 +27,15 @@ class ItemsController < ApplicationController
       params.permit(:name, :rank, :subject_id, :id)
     end
 
-    def current_items
-      @current_items = Subject.find(item_params[:subject_id]).items
+    def current_subject
+      Subject.find(item_params[:subject_id])
     end
 
+    def current_items
+      current_subject.items
+    end
+
+    def current_items_user
+      current_subject.user
+    end
 end

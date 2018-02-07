@@ -187,13 +187,16 @@ export function getItems(_this, subjectId) {
       uid: localStorage.getItem('uid'),
     },
   }).then((response) => {
-    if (response.ok) {
+    if (response.status == 200) {
       response.json().then((responseData) => {
         _this.setState({
           items: responseData,
         });
       });
-    } else {
+    } else if (response.status == 204) {
+      history.push('/');
+    }
+    else {
       localStorage.setItem('login', 'false');
       history.push('/login');
     }

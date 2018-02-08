@@ -14,7 +14,7 @@ class SubjectsController < ApplicationController
   def create
     @subject = Subject.new(subject_params)
     @subject.save
-    render json: current_v1_user.subjects
+    render json: @subject
   end
 
   def destroy

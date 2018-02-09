@@ -6,6 +6,11 @@ $ mysql -uroot
 > CREATE USER ranker IDENTIFIED BY 'rankerranker';
 > grant all on *.* to 'ranker'@'localhost' identified by 'rankerranker';
 
+# migration
+$rails db:create
+$rails db:migrate
+$rails db:seed # if you need
+
 $ rails s
 # subject
 $ curl -X GET http://localhost:3000/subjects/index

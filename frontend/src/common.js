@@ -75,9 +75,7 @@ export function createSubject(_this, title, userId) {
     .then((response) => {
       if (response.ok) {
         response.json().then((responseData) => {
-          _this.setState((prev) => {
-            return {subjects: prev.subjects.concat([responseData])}
-          });
+          _this.setState(prev => ({ subjects: prev.subjects.concat([responseData]) }));
         });
       } else {
         throw Error(response.statusText);
@@ -166,9 +164,7 @@ export function createItem(_this, name, subjectId) {
     .then((response) => {
       if (response.ok) {
         response.json().then((responseData) => {
-          _this.setState((prev) => {
-            return {items: prev.items.concat([responseData])}
-          });
+          _this.setState(prev => ({ items: prev.items.concat([responseData]) }));
         });
       } else {
         throw Error(response.statusText);
@@ -195,8 +191,7 @@ export function getItems(_this, subjectId) {
       });
     } else if (response.status == 204) {
       history.push('/');
-    }
-    else {
+    } else {
       localStorage.setItem('login', 'false');
       history.push('/login');
     }

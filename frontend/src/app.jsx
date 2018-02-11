@@ -15,6 +15,7 @@ import {
   getSubject,
   subjectsUpdated,
   getItems,
+  getEditableItems,
   createSubject,
   createItem,
 } from './common';
@@ -60,7 +61,7 @@ export class App extends React.Component {
               <EditSubject
                 items={this.state.items}
                 subject={this.state.subject}
-                getItemsCallback={subjectId => getItems(this, subjectId)}
+                getItemsCallback={subjectId => getEditableItems(this, subjectId)}
                 getSubjectCallback={subjectId => getSubject(this, subjectId)}
                 createItemsCallback={(name, subjectId) => {
                   createItem(this, name, subjectId);

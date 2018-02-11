@@ -197,3 +197,26 @@ export function getItems(_this, subjectId) {
     }
   });
 }
+
+export function getEditableItems(_this, subjectId) {
+  fetch(`http://localhost:3000/subjects/${subjectId}/items/editable_items`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+  }).then((response) => {
+    if (response.status == 200) {
+      response.json().then((responseData) => {
+        _this.setState({
+          items: responseData,
+        });
+      });
+    } else if (response.status == 204) {
+      history.push('/');
+    } else {
+      localStorage.setItem('login', 'false');
+      history.push('/login');
+    }
+  });
+}

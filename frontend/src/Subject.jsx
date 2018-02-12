@@ -14,10 +14,6 @@ export class Subject extends React.Component {
     const subject = this.props.subject;
     const items = this.props.items;
     if (subject) {
-      if (!subject.is_public) {
-        // FIXME: 何も表示しないのはまずいのではないか
-        return null;
-      }
       return (
         // item を表示する
         <div>
@@ -37,6 +33,7 @@ export class Subject extends React.Component {
         </div>
       );
     }
+    // FIXME: 表示しない場合も loading... と表示されてしまう
     return <div>loading...</div>;
   }
 }

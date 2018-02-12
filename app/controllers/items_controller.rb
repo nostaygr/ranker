@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_v1_user!, only: [:editable_items, :create]
 
   def index
-    if current_subject.is_public
+    if  (v1_user_signed_in? && current_v1_user.id == current_items_user.id) || current_subject.is_public
       render json: current_items and return
     end
 

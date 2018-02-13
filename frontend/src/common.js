@@ -75,9 +75,7 @@ export function createSubject(_this, title, userId) {
     .then((response) => {
       if (response.ok) {
         response.json().then((responseData) => {
-          _this.setState((prev) => {
-            return {subjects: prev.subjects.concat([responseData])}
-          });
+          _this.setState(prev => ({ subjects: prev.subjects.concat([responseData]) }));
         });
       } else {
         throw Error(response.statusText);
@@ -166,9 +164,7 @@ export function createItem(_this, name, subjectId) {
     .then((response) => {
       if (response.ok) {
         response.json().then((responseData) => {
-          _this.setState((prev) => {
-            return {items: prev.items.concat([responseData])}
-          });
+          _this.setState(prev => ({ items: prev.items.concat([responseData]) }));
         });
       } else {
         throw Error(response.statusText);
@@ -195,8 +191,30 @@ export function getItems(_this, subjectId) {
       });
     } else if (response.status == 204) {
       history.push('/');
+    } else {
+      localStorage.setItem('login', 'false');
+      history.push('/login');
     }
-    else {
+  });
+}
+
+export function getEditableItems(_this, subjectId) {
+  fetch(`http://localhost:3000/subjects/${subjectId}/items/editable_items`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+  }).then((response) => {
+    if (response.status == 200) {
+      response.json().then((responseData) => {
+        _this.setState({
+          items: responseData,
+        });
+      });
+    } else if (response.status == 204) {
+      history.push('/');
+    } else {
       localStorage.setItem('login', 'false');
       history.push('/login');
     }

@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   end
   resources :users, shallow: true, only: [] do
     resources :subjects, shallow: true, only: [:index, :show, :create, :destroy] do
-      resources :items, only: [:index, :show, :create, :destroy]
+      resources :items, only: [:index, :show, :create, :destroy] do
+        collection do
+          get :editable_items
+        end
+      end
     end
   end
 

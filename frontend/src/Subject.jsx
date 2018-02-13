@@ -2,32 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createItem } from './common';
 
-class ItemCreateForm extends React.Component {
-  handleSubmit(event, subjectId, onClick) {
-    event.preventDefault();
-    const name = event.target.name.value;
-    if (!name) {
-      return;
-    }
-    onClick(name, subjectId);
-
-    ReactDOM.findDOMNode(event.target.name).value = '';
-  }
-
-  render() {
-    return (
-      <form
-        id="subject"
-        className="commentForm"
-        onSubmit={e => this.handleSubmit(e, this.props.subjectId, this.props.onClick)}
-      >
-        <input type="text" name="name" placeholder="name" />
-        <input type="submit" value="Post" />
-      </form>
-    );
-  }
-}
-
 export class Subject extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
@@ -56,15 +30,10 @@ export class Subject extends React.Component {
                 </tbody>
               ))}
           </table>
-          <ItemCreateForm
-            subjectId={subject.id}
-            onClick={(name, subjectId) => {
-              this.props.createItemsCallback(name, subjectId);
-            }}
-          />
         </div>
       );
     }
+    // FIXME: 表示しない場合も loading... と表示されてしまう
     return <div>loading...</div>;
   }
 }

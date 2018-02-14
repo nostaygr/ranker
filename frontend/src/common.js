@@ -220,3 +220,32 @@ export function getEditableItems(_this, subjectId) {
     }
   });
 }
+
+export function publishItems(_this, subjectId) {
+  const form = new FormData();
+  form.append('is_public', true);
+
+  fetch(`http://localhost:3000/subjects/${subjectId}/items/publish_items`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+    method: 'PUT',
+    body: form,
+  })
+    .then((response) => {
+      if (response.ok) {
+        response.json().then((responseData) => {
+          _this.setState({
+            subject: responseData,
+          });
+        });
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch((error) => {
+      alert('failed to publish');
+    });
+}

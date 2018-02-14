@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_v1_user!, only: [:editable_items, :create]
+  before_action :authenticate_v1_user!, only: [:editable_items, :publish_items, :create]
 
   def index
     if  (v1_user_signed_in? && current_v1_user.id == current_items_user.id) || current_subject.is_public
@@ -12,6 +12,15 @@ class ItemsController < ApplicationController
   def editable_items
     if current_v1_user.id == current_items_user.id
       render json: current_items and return
+    end
+
+    render nothing: true, status: 204
+  end
+
+  def publish_items
+    if current_v1_user.id == current_items_user.id
+      current_subject.update(is_public: item_params[:is_public])
+      render json: current_subject and return
     end
 
     render nothing: true, status: 204
@@ -32,7 +41,7 @@ class ItemsController < ApplicationController
   private
 
     def item_params
-      params.permit(:name, :rank, :subject_id, :id)
+      params.permit(:name, :rank, :subject_id, :id, :is_public)
     end
 
     def current_subject

@@ -67,7 +67,9 @@ export class App extends React.Component {
                 createItemsCallback={(name, subjectId) => {
                   createItem(this, name, subjectId);
                 }}
-                publishItemsCallback={subjectId => publishItems(this, subjectId)}
+                publishItemsCallback={(subjectId, isPublic) =>
+                  publishItems(this, subjectId, isPublic)
+                }
                 {...props}
               />
             )}

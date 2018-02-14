@@ -221,9 +221,9 @@ export function getEditableItems(_this, subjectId) {
   });
 }
 
-export function publishItems(_this, subjectId) {
+export function publishItems(_this, subjectId, isPublic) {
   const form = new FormData();
-  form.append('is_public', true);
+  form.append('is_public', !isPublic);
 
   fetch(`http://localhost:3000/subjects/${subjectId}/items/publish_items`, {
     headers: {

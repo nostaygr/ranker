@@ -30,9 +30,9 @@ class ItemCreateForm extends React.Component {
 }
 
 class ItemPublishButton extends React.Component {
-  handleSubmit(event, subjectId, onClick) {
+  handleSubmit(event, subjectId, isPublic, onClick) {
     event.preventDefault();
-    onClick(subjectId);
+    onClick(subjectId, isPublic);
   }
 
   render() {
@@ -40,9 +40,11 @@ class ItemPublishButton extends React.Component {
       <form
         id="itemPublishButton"
         className="commentForm"
-        onSubmit={e => this.handleSubmit(e, this.props.subjectId, this.props.onClick)}
+        onSubmit={e =>
+          this.handleSubmit(e, this.props.subjectId, this.props.isPublic, this.props.onClick)
+        }
       >
-        <input type="submit" value="公開する" />
+        <input type="submit" value={this.props.isPublic ? '非公開にする' : '公開する'} />
       </form>
     );
   }
@@ -85,8 +87,9 @@ export class EditSubject extends React.Component {
           <Link to={`/subjects/${subject.id}`}>プレビュー</Link>
           <ItemPublishButton
             subjectId={subject.id}
-            onClick={(subjectId) => {
-              this.props.publishItemsCallback(subjectId);
+            isPublic={subject.is_public}
+            onClick={(subjectId, isPublic) => {
+              this.props.publishItemsCallback(subjectId, isPublic);
             }}
           />
         </div>

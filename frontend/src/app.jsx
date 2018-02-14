@@ -18,7 +18,7 @@ import {
   getEditableItems,
   createSubject,
   createItem,
-  publishItems
+  publishItems,
 } from './common';
 
 export class App extends React.Component {

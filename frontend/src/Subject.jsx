@@ -17,7 +17,7 @@ export class Subject extends React.Component {
       return (
         // item を表示する
         <div>
-          <div>{subject.title}</div>
+          <div>{`${subject.title} [${subject.is_public ? '公開' : '非公開'}]`}</div>
           <table>
             {items &&
               items.map(item => (

@@ -29,6 +29,27 @@ class ItemCreateForm extends React.Component {
   }
 }
 
+class ItemPublishButton extends React.Component {
+  handleSubmit(event, subjectId, isPublic, onClick) {
+    event.preventDefault();
+    onClick(subjectId, isPublic);
+  }
+
+  render() {
+    return (
+      <form
+        id="itemPublishButton"
+        className="commentForm"
+        onSubmit={e =>
+          this.handleSubmit(e, this.props.subjectId, this.props.isPublic, this.props.onClick)
+        }
+      >
+        <input type="submit" value={this.props.isPublic ? '非公開にする' : '公開する'} />
+      </form>
+    );
+  }
+}
+
 export class EditSubject extends React.Component {
   componentDidMount() {
     if (localStorage.getItem('login') === 'true') {
@@ -44,7 +65,7 @@ export class EditSubject extends React.Component {
       return (
         // item を表示する
         <div>
-          <div>{subject.title}</div>
+          <div>{`${subject.title} [${subject.is_public ? '公開' : '非公開'}]`}</div>
           <table>
             {items &&
               items.map(item => (
@@ -63,7 +84,14 @@ export class EditSubject extends React.Component {
               this.props.createItemsCallback(name, subjectId);
             }}
           />
-          <Link to={`/subjects/${subject.id}`}>一般公開ページを確認</Link>
+          <Link to={`/subjects/${subject.id}`}>プレビュー</Link>
+          <ItemPublishButton
+            subjectId={subject.id}
+            isPublic={subject.is_public}
+            onClick={(subjectId, isPublic) => {
+              this.props.publishItemsCallback(subjectId, isPublic);
+            }}
+          />
         </div>
       );
     }

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :items, only: [:index, :show, :create, :destroy] do
         collection do
           get :editable_items
+          put :publish_items
         end
       end
     end

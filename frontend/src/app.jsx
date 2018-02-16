@@ -18,6 +18,7 @@ import {
   getEditableItems,
   createSubject,
   createItem,
+  publishItems,
 } from './common';
 
 export class App extends React.Component {
@@ -66,6 +67,9 @@ export class App extends React.Component {
                 createItemsCallback={(name, subjectId) => {
                   createItem(this, name, subjectId);
                 }}
+                publishItemsCallback={(subjectId, isPublic) =>
+                  publishItems(this, subjectId, isPublic)
+                }
                 {...props}
               />
             )}

@@ -23,20 +23,17 @@ class SignupForm extends React.Component {
 
   validate(name, email, password) {
     const field = ["name", "email", "password"];
-    let validationError = false
+    let isValid = true
     for (let f of field) {
       if (!eval(f)) {
         eval("this.setState({" + f + "ErrorText: f + ' is invalid', })");
-        validationError = true;
+        isValid = false;
       } else {
         eval("this.setState({" + f + "ErrorText: '', })");
       }
     }
 
-    if (validationError) {
-      return true
-    }
-    return false
+    return isValid;
   }
 
   handleSubmit(event, onClick) {
@@ -45,7 +42,7 @@ class SignupForm extends React.Component {
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    if(this.validate(name, email, password)) {
+    if(!this.validate(name, email, password)) {
       return;
     }
     onClick(name, email, password);

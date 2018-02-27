@@ -17,7 +17,9 @@ class SignupForm extends React.Component {
 
   onTextFieldChange(event) {
     if (event.target.value) {
-      eval("this.setState({" + event.target.name + "ErrorText: '', })");
+      this.setState({
+        [event.target.name + "ErrorText"]: "",
+      });
     }
   }
 

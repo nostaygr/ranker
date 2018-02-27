@@ -26,7 +26,6 @@ class SignupForm extends React.Component {
   validate(items) {
     let isValid = true
     for (let item in items) {
-      // 空白チェック
       if (!items[item]) {
         this.setState({
           [item + "ErrorText"]: `${item} is invalid`,

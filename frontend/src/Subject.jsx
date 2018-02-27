@@ -4,10 +4,8 @@ import { createItem } from './common';
 
 export class Subject extends React.Component {
   componentDidMount() {
-    if (localStorage.getItem('login') === 'true') {
-      this.props.getItemsCallback(this.props.match.params.id);
-      this.props.getSubjectCallback(this.props.match.params.id);
-    }
+    this.props.getItemsCallback(this.props.match.params.id);
+    this.props.getSubjectCallback(this.props.match.params.id);
   }
 
   render() {

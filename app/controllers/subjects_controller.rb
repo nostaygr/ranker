@@ -1,5 +1,5 @@
 class SubjectsController < ApplicationController
-  before_action :authenticate_v1_user!
+  before_action :authenticate_v1_user!, only: [:index, :create, :destroy]
 
   def index
     @subjects = current_v1_user.subjects
@@ -25,7 +25,7 @@ class SubjectsController < ApplicationController
   private
 
     def subject_params
-      params[:user_id] = current_v1_user.id
+      params[:user_id] = current_v1_user.id if current_v1_user.present?
       params.permit(:title, :is_public, :user_id, :id)
     end
 end

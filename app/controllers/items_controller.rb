@@ -5,7 +5,6 @@ class ItemsController < ApplicationController
     if  (v1_user_signed_in? && current_v1_user.id == current_items_user.id) || current_subject.is_public
       render json: current_items and return
     end
-
     render nothing: true, status: 204
   end
 
@@ -13,7 +12,6 @@ class ItemsController < ApplicationController
     if current_v1_user.id == current_items_user.id
       render json: current_items and return
     end
-
     render nothing: true, status: 204
   end
 
@@ -22,7 +20,6 @@ class ItemsController < ApplicationController
       current_subject.update(is_public: item_params[:is_public])
       render json: current_subject and return
     end
-
     render nothing: true, status: 204
   end
 

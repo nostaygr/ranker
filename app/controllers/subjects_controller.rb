@@ -7,8 +7,11 @@ class SubjectsController < ApplicationController
   end
 
   def show
-    @subject = Subject.find(subject_params[:id])
-    render json: @subject
+    subject = Subject.find(subject_params[:id])
+    if (v1_user_signed_in? && current_v1_user.id == subject.user.id) || subject.is_public
+      return render json: subject
+    end
+    render nothing: true, status: 204
   end
 
   def create

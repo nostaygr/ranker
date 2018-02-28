@@ -55,6 +55,9 @@ export function login(email, password) {
 }
 
 export const setLogout = function () {
+  localStorage.setItem('access-token', '');
+  localStorage.setItem('client', '');
+  localStorage.setItem('uid', '');
   localStorage.setItem('login', 'false');
 };
 

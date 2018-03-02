@@ -57,7 +57,11 @@ export class Subjects extends React.Component {
                       <Link to={`/subjects/${subject.id}/edit`}>{subject.title}</Link>
                     </td>
                     <td>
-                      <form id="deleteSubject" className="form" onSubmit={e => this.deleteSubmit(e, this.props.deleteSubjectCallback)}>
+                      <form
+                        id="deleteSubject"
+                        className="form"
+                        onSubmit={e => this.deleteSubmit(e, this.props.deleteSubjectCallback)}
+                      >
                         <input type="hidden" name="subjectId" value={subject.id} />
                         <input type="submit" value="Delete" />
                       </form>

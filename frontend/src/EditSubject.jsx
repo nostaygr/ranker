@@ -58,6 +58,11 @@ export class EditSubject extends React.Component {
     }
   }
 
+  deleteItem(event, onClick) {
+    event.preventDefault();
+    onClick(event.target.itemId.value);
+  }
+
   render() {
     const subject = this.props.subject;
     const items = this.props.items;
@@ -73,6 +78,12 @@ export class EditSubject extends React.Component {
                   <tr>
                     <td>
                       {item.rank}:{item.name}
+                    </td>
+                    <td>
+                      <form id="deleteItem" className="form" onSubmit={e => this.deleteItem(e, this.props.deleteItemCallback)}>
+                        <input type="hidden" name="itemId" value={item.id} />
+                        <input type="submit" value="Delete" />
+                      </form>
                     </td>
                   </tr>
                 </tbody>

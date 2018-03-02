@@ -16,6 +16,7 @@ import {
   deleteSubject,
   subjectsUpdated,
   getItems,
+  deleteItem,
   getEditableItems,
   createSubject,
   createItem,
@@ -69,6 +70,7 @@ export class App extends React.Component {
                 createItemsCallback={(name, subjectId) => {
                   createItem(this, name, subjectId);
                 }}
+                deleteItemCallback={itemId => deleteItem(itemId)}
                 publishItemsCallback={(subjectId, isPublic) =>
                   publishItems(this, subjectId, isPublic)
                 }

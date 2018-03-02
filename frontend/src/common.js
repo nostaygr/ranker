@@ -201,6 +201,27 @@ export function getItems(_this, subjectId) {
   });
 }
 
+export function deleteItem(itemId) {
+  fetch(`http://localhost:3000/items/${itemId}`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+    method: 'DELETE',
+  })
+    .then((response) => {
+      if (response.ok) {
+        location.reload();
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch((error) => {
+      alert('failed to delete item');
+    });
+}
+
 export function getEditableItems(_this, subjectId) {
   fetch(`http://localhost:3000/subjects/${subjectId}/items/editable_items`, {
     headers: {

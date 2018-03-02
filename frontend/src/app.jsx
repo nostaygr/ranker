@@ -13,6 +13,7 @@ import {
   setLogout,
   getSubjects,
   getSubject,
+  deleteSubject,
   subjectsUpdated,
   getItems,
   getEditableItems,
@@ -47,6 +48,7 @@ export class App extends React.Component {
               <Subjects
                 subjects={this.state.subjects}
                 getSubjectsCallback={userId => getSubjects(this, userId)}
+                deleteSubjectCallback={subjectId => deleteSubject(subjectId)}
                 createSubjectCallback={(title, userId) => {
                   createSubject(this, title, userId);
                 }}

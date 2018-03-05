@@ -49,7 +49,7 @@ export class App extends React.Component {
               <Subjects
                 subjects={this.state.subjects}
                 getSubjectsCallback={userId => getSubjects(this, userId)}
-                deleteSubjectCallback={subjectId => deleteSubject(subjectId)}
+                deleteSubjectCallback={subjectId => deleteSubject(this, subjectId)}
                 createSubjectCallback={(title, userId) => {
                   createSubject(this, title, userId);
                 }}

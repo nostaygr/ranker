@@ -130,7 +130,7 @@ export function getSubject(_this, subjectId) {
   });
 }
 
-export function deleteSubject(subjectId) {
+export function deleteSubject(_this, subjectId) {
   fetch(`http://localhost:3000/subjects/${subjectId}`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
@@ -141,7 +141,15 @@ export function deleteSubject(subjectId) {
   })
     .then((response) => {
       if (response.ok) {
-        location.reload();
+        _this.setState((prev) => {
+          const subjects = [];
+          prev.subjects.forEach((subject) => {
+            if (subject.id.toString() !== subjectId) {
+              subjects.push(subject);
+            }
+          });
+          return { subjects };
+        });
       } else {
         throw Error(response.statusText);
       }

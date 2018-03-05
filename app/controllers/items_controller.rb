@@ -34,6 +34,7 @@ class ItemsController < ApplicationController
 
   def destroy
     Item.find(item_params[:id]).destroy
+    render nothing: true, status: 204
   end
 
   private

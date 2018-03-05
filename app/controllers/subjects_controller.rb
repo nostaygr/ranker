@@ -21,6 +21,7 @@ class SubjectsController < ApplicationController
 
   def destroy
     Subject.find(subject_params[:id]).destroy
+    render nothing: true, status: 204
   end
 
   private

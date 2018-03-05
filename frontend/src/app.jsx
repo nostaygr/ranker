@@ -70,7 +70,7 @@ export class App extends React.Component {
                 createItemsCallback={(name, subjectId) => {
                   createItem(this, name, subjectId);
                 }}
-                deleteItemCallback={itemId => deleteItem(itemId)}
+                deleteItemCallback={itemId => deleteItem(this, itemId)}
                 publishItemsCallback={(subjectId, isPublic) =>
                   publishItems(this, subjectId, isPublic)
                 }

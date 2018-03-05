@@ -201,7 +201,7 @@ export function getItems(_this, subjectId) {
   });
 }
 
-export function deleteItem(itemId) {
+export function deleteItem(_this, itemId) {
   fetch(`http://localhost:3000/items/${itemId}`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
@@ -212,7 +212,15 @@ export function deleteItem(itemId) {
   })
     .then((response) => {
       if (response.ok) {
-        location.reload();
+        _this.setState(prev => {
+          let items = []
+          prev.items.forEach(item => {
+            if (item.id.toString() !== itemId) {
+              items.push(item)
+            }
+          })
+          return {items: items};
+        });
       } else {
         throw Error(response.statusText);
       }

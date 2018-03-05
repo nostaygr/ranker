@@ -212,14 +212,14 @@ export function deleteItem(_this, itemId) {
   })
     .then((response) => {
       if (response.ok) {
-        _this.setState(prev => {
-          let items = []
-          prev.items.forEach(item => {
+        _this.setState((prev) => {
+          const items = [];
+          prev.items.forEach((item) => {
             if (item.id.toString() !== itemId) {
-              items.push(item)
+              items.push(item);
             }
-          })
-          return {items: items};
+          });
+          return { items };
         });
       } else {
         throw Error(response.statusText);

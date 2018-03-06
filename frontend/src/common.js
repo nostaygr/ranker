@@ -142,12 +142,7 @@ export function deleteSubject(_this, subjectId) {
     .then((response) => {
       if (response.ok) {
         _this.setState((prev) => {
-          const subjects = [];
-          prev.subjects.forEach((subject) => {
-            if (subject.id.toString() !== subjectId) {
-              subjects.push(subject);
-            }
-          });
+          const subjects = prev.subjects.filter(subject => subject.id.toString() !== subjectId);
           return { subjects };
         });
       } else {
@@ -221,12 +216,7 @@ export function deleteItem(_this, itemId) {
     .then((response) => {
       if (response.ok) {
         _this.setState((prev) => {
-          const items = [];
-          prev.items.forEach((item) => {
-            if (item.id.toString() !== itemId) {
-              items.push(item);
-            }
-          });
+          const items = prev.items.filter(item => item.id.toString() !== itemId);
           return { items };
         });
       } else {

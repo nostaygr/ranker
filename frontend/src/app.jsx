@@ -13,8 +13,10 @@ import {
   setLogout,
   getSubjects,
   getSubject,
+  deleteSubject,
   subjectsUpdated,
   getItems,
+  deleteItem,
   getEditableItems,
   createSubject,
   createItem,
@@ -47,6 +49,7 @@ export class App extends React.Component {
               <Subjects
                 subjects={this.state.subjects}
                 getSubjectsCallback={userId => getSubjects(this, userId)}
+                deleteSubjectCallback={subjectId => deleteSubject(this, subjectId)}
                 createSubjectCallback={(title, userId) => {
                   createSubject(this, title, userId);
                 }}
@@ -67,6 +70,7 @@ export class App extends React.Component {
                 createItemsCallback={(name, subjectId) => {
                   createItem(this, name, subjectId);
                 }}
+                deleteItemCallback={itemId => deleteItem(this, itemId)}
                 publishItemsCallback={(subjectId, isPublic) =>
                   publishItems(this, subjectId, isPublic)
                 }

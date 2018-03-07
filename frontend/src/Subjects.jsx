@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import history from './history';
 import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { deleteSubject } from './common';
 
 class SubjectCreateForm extends React.Component {
   handleSubmit(event, onClick) {
@@ -38,10 +37,9 @@ export class Subjects extends React.Component {
     }
   }
 
-  deleteSubmit(event) {
+  deleteSubmit(event, onClick) {
     event.preventDefault();
-    const subjectId = event.target.subjectId.value;
-    deleteSubject(subjectId);
+    onClick(event.target.subjectId.value);
   }
 
   render() {
@@ -59,7 +57,11 @@ export class Subjects extends React.Component {
                       <Link to={`/subjects/${subject.id}/edit`}>{subject.title}</Link>
                     </td>
                     <td>
-                      <form id="deleteSubject" className="form" onSubmit={this.deleteSubmit}>
+                      <form
+                        id="deleteSubject"
+                        className="form"
+                        onSubmit={e => this.deleteSubmit(e, this.props.deleteSubjectCallback)}
+                      >
                         <input type="hidden" name="subjectId" value={subject.id} />
                         <input type="submit" value="Delete" />
                       </form>

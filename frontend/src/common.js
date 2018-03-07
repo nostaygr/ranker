@@ -130,7 +130,7 @@ export function getSubject(_this, subjectId) {
   });
 }
 
-export function deleteSubject(subjectId) {
+export function deleteSubject(_this, subjectId) {
   fetch(`http://localhost:3000/subjects/${subjectId}`, {
     headers: {
       'access-token': localStorage.getItem('access-token'),
@@ -141,7 +141,10 @@ export function deleteSubject(subjectId) {
   })
     .then((response) => {
       if (response.ok) {
-        location.reload();
+        _this.setState((prev) => {
+          const subjects = prev.subjects.filter(subject => subject.id.toString() !== subjectId);
+          return { subjects };
+        });
       } else {
         throw Error(response.statusText);
       }
@@ -199,6 +202,30 @@ export function getItems(_this, subjectId) {
       history.push('/login');
     }
   });
+}
+
+export function deleteItem(_this, itemId) {
+  fetch(`http://localhost:3000/items/${itemId}`, {
+    headers: {
+      'access-token': localStorage.getItem('access-token'),
+      client: localStorage.getItem('client'),
+      uid: localStorage.getItem('uid'),
+    },
+    method: 'DELETE',
+  })
+    .then((response) => {
+      if (response.ok) {
+        _this.setState((prev) => {
+          const items = prev.items.filter(item => item.id.toString() !== itemId);
+          return { items };
+        });
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+    .catch((error) => {
+      alert('failed to delete item');
+    });
 }
 
 export function getEditableItems(_this, subjectId) {

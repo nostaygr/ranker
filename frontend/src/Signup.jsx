@@ -18,22 +18,22 @@ class SignupForm extends React.Component {
   onTextFieldChange(event) {
     if (event.target.value) {
       this.setState({
-        [event.target.name + "ErrorText"]: "",
+        [`${event.target.name}ErrorText`]: '',
       });
     }
   }
 
   validate(items) {
-    let isValid = true
-    for (let item in items) {
+    let isValid = true;
+    for (const item in items) {
       if (!items[item]) {
         this.setState({
-          [item + "ErrorText"]: `${item} is invalid`,
+          [`${item}ErrorText`]: `${item} is invalid`,
         });
         isValid = false;
       } else {
         this.setState({
-          [item + "ErrorText"]: "",
+          [`${item}ErrorText`]: '',
         });
       }
     }
@@ -47,7 +47,7 @@ class SignupForm extends React.Component {
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    if(!this.validate({name, email, password})) {
+    if (!this.validate({ name, email, password })) {
       return;
     }
     onClick(name, email, password);

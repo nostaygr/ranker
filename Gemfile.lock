@@ -185,7 +185,7 @@ DEPENDENCIES
   mysql2 (~> 0.4)
   nio4r (~> 2.1)
   nokogiri (~> 1.8)
-  omniauth-twitter
+  omniauth-twitter (~> 1.4.0)
   orm_adapter (~> 0.5)
   puma (~> 3.7)
   rack (~> 2.0)

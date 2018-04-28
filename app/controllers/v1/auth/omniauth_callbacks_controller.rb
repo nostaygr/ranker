@@ -1,7 +1,5 @@
 class V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   def omniauth_success
-    logger.debug("hogehogehoge")
-
     get_resource_from_auth_hash
     create_token_info
     set_token_on_resource
@@ -33,7 +31,6 @@ class V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacks
     response.status = 301
     yield @resource if block_given?
 
-    logger.debug "gehogehogeho"
     render_data_or_redirect('deliverCredentials', @auth_params.as_json, @resource.as_json)
 
   end
@@ -63,6 +60,7 @@ class V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacks
   end
 
   private
+
   def render_data_or_redirect(message, data, user_data = {})
     redirect_to DeviseTokenAuth::Url.generate(auth_origin_url, data.merge(user_id: @resource.id))
 

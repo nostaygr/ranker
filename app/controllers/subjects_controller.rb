@@ -2,7 +2,7 @@ class SubjectsController < ApplicationController
   before_action :authenticate_v1_user!, only: [:index, :create, :destroy]
 
   def index
-    render json: current_v1_user.subjects 
+    render json: current_v1_user.subjects
   end
 
   def show

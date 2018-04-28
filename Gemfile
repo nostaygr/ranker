@@ -96,5 +96,5 @@ gem 'sprockets-rails', '~> 3.2'
 gem 'ffi', '~> 1.9'
 gem 'hashie', '~> 3.5'
 gem 'rb-fsevent', '~> 0.10'
-gem 'rb-inotify', '~> 0.9'
+gem 'rb-inotify', '~> 0.9', :require => false
 gem 'ruby_dep', '~> 1.5'

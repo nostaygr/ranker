@@ -1,4 +1,5 @@
 import history from './history';
+import queryString from 'query-string'
 
 export function signup(name, email, password) {
   const form = new FormData();
@@ -278,4 +279,17 @@ export function publishItems(_this, subjectId, isPublic) {
     .catch((error) => {
       alert('failed to publish');
     });
+}
+
+export function omniauthLogin() {
+  const query = queryString.parse(history.location.search)
+  console.log(query)
+  if (query.auth_token && query.client_id && query.uid) {
+    localStorage.setItem('access-token', query.auth_token);
+    localStorage.setItem('client', query.client_id);
+    localStorage.setItem('uid', query.uid);
+    localStorage.setItem('userId', query.user_id);
+    localStorage.setItem('login', 'true');
+  }
+  history.push('/')
 }

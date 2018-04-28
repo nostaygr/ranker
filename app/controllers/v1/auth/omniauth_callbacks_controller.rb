@@ -61,4 +61,36 @@ class V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacks
 
     @resource
   end
+
+  private
+  def render_data_or_redirect(message, data, user_data = {})
+    redirect_to DeviseTokenAuth::Url.generate(auth_origin_url, data.merge(user_id: @resource.id))
+
+    ## We handle inAppBrowser and newWindow the same, but it is nice
+    ## to support values in case people need custom implementations for each case
+    ## (For example, nbrustein does not allow new users to be created if logging in with
+    ## an inAppBrowser)
+    ##
+    ## See app/views/devise_token_auth/omniauth_external_window.html.erb to understand
+    ## why we can handle these both the same.  The view is setup to handle both cases
+    ## at the same time.
+    #if ['inAppBrowser', 'newWindow'].include?(omniauth_window_type)
+    #  render_data(message, user_data.merge(data))
+
+    #elsif auth_origin_url # default to same-window implementation, which forwards back to auth_origin_url
+
+    #  # build and redirect to destination url
+    #  redirect_to DeviseTokenAuth::Url.generate(auth_origin_url, data.merge(user_id: @resource.id))
+    #else
+    #  # there SHOULD always be an auth_origin_url, but if someone does something silly
+    #  # like coming straight to this url or refreshing the page at the wrong time, there may not be one.
+    #  # In that case, just render in plain text the error message if there is one or otherwise
+    #  # a generic message.
+    #  fallback_render data[:error] || 'An error occurred'
+    #end
+  end
+
+  def auth_origin_url
+    "http://localhost:4000/omniauth-login"
+  end
 end

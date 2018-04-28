@@ -39,6 +39,8 @@ gem 'omniauth-twitter', '~> 1.4.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 9.1', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-rails', '~> 0.3.6'
+  gem 'pry-byebug', '~> 3.5.1'
 end
 
 group :development do

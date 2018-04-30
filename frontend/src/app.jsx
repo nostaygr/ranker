@@ -5,12 +5,14 @@ import { EditSubject } from './EditSubject';
 import { Subject } from './Subject';
 import { Subjects } from './Subjects';
 import { Login } from './Login';
+import { OmniauthLogin } from './OmniauthLogin';
 import { Logout } from './Logout';
 import { Signup } from './Signup';
 import {
   signup,
   login,
   setLogout,
+  omniauthLogin,
   getSubjects,
   getSubject,
   deleteSubject,
@@ -57,6 +59,7 @@ export class App extends React.Component {
             )}
           />
           <Route path="/login" render={() => <Login onClick={login} />} />
+          <Route path="/omniauth-login" render={() => <OmniauthLogin onClick={omniauthLogin} />} />
           <Route path="/logout" render={() => <Logout setLogout={setLogout} />} />
           <Route path="/signup" render={() => <Signup onClick={signup} />} />
           <Route

@@ -37,7 +37,7 @@ module RankerBackend
     # TODO: 本番用の設定必要
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'localhost:4000'
+        origins Settings[:base_url]
         resource '*',
           :headers => :any,
           :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],

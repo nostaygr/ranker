@@ -35,6 +35,9 @@ gem 'devise_token_auth', '~> 0.1'
 # omniauth
 gem 'omniauth-twitter', '~> 1.4.0'
 
+# constants for each environment
+gem 'config', '~> 1.7.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 9.1', platforms: [:mri, :mingw, :x64_mingw]

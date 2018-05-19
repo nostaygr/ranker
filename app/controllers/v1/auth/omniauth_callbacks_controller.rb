@@ -27,7 +27,7 @@ class V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacks
     @resource.save!
 
     update_auth_header # これは自分で追加する
-    response.location = "http://localhost:4000"
+    response.location = Settings[:base_url]
     response.status = 301
     yield @resource if block_given?
 
@@ -89,6 +89,6 @@ class V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacks
   end
 
   def auth_origin_url
-    "http://localhost:4000/omniauth-login"
+    "#{Settings[:base_url]}/omniauth-login"
   end
 end

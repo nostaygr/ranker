@@ -1,2 +1,2 @@
-rails: mysql.server restart;bundle exec rails s -p 3000
+rails: bundle exec rails s -p 3000 -e production
 frontend: cd frontend;yarn run prod-start

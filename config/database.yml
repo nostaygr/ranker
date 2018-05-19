@@ -29,3 +29,5 @@ test:
 production:
   <<: *default
   database: db/production_mysql2
+  username: ENV['MYSQL_USERNAME']
+  password: ENV['MYSQL_PASSWORD']

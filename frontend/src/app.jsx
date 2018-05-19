@@ -7,6 +7,7 @@ import { Subjects } from './Subjects';
 import { Login } from './Login';
 import { OmniauthLogin } from './OmniauthLogin';
 import { Logout } from './Logout';
+import { AboutThisPage } from './AboutThisPage';
 import { Signup } from './Signup';
 import {
   signup,
@@ -61,6 +62,7 @@ export class App extends React.Component {
           <Route path="/login" render={() => <Login onClick={login} />} />
           <Route path="/omniauth-login" render={() => <OmniauthLogin onClick={omniauthLogin} />} />
           <Route path="/logout" render={() => <Logout setLogout={setLogout} />} />
+          <Route path="/about" render={() => <AboutThisPage />} />
           <Route path="/signup" render={() => <Signup onClick={signup} />} />
           <Route
             path="/subjects/:id/edit"

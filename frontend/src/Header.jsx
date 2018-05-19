@@ -14,6 +14,10 @@ function getLinks() {
         name: 'Home',
       },
       {
+        path: '/about',
+        name: 'About',
+      },
+      {
         path: '/logout',
         name: 'Logout',
       },
@@ -27,6 +31,10 @@ function getLinks() {
     {
       path: '/',
       name: 'Home',
+    },
+    {
+      path: '/about',
+      name: 'About',
     },
     {
       path: '/login',

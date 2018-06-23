@@ -32,8 +32,8 @@
     "whatwg-fetch": "^2.0.3"
   },
   "scripts": {
-    "start": "webpack-dev-server --history-api-fallback",
-    "prod-start": "NODE_ENV=production webpack -p",
+    "start": "webpack-dev-server --history-api-fallback --open --config webpack.dev.js",
+    "prod-start": "NODE_ENV=production webpack --config webpack.prod.js",
     "lint": "prettier-eslint --write src/*",
     "build": "./node_modules/.bin/webpack"
   },
@@ -42,6 +42,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "webpack-dev-server": "^2.9.5"
+    "webpack-dev-server": "^2.9.5",
+    "webpack-merge": "^4.1.3"
   }
 }
